@@ -1,7 +1,7 @@
 .social { padding: 100px 0; }
 .socialInner { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
 .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; max-width: 700px; margin: 60px auto 0; }
-.linkCard { background: rgba(255,255,255,0.04); backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,0.08); border-radius: 16px; padding: 28px 20px; display: flex; flex-direction: column; align-items: center; gap: 12px; text-decoration: none; color: #f1f5f9; transition: all 0.3s ease; }
+.linkCard { background: var(--bg-card); backdrop-filter: blur(12px); border: 1px solid var(--border-color); border-radius: 16px; padding: 28px 20px; display: flex; flex-direction: column; align-items: center; gap: 12px; text-decoration: none; color: var(--text-primary); transition: all 0.3s ease; }
 .linkCard:hover { transform: translateY(-4px); }
 .linkCard svg { width: 36px; height: 36px; }
 .linkLabel { font-weight: 600; font-size: 0.9rem; }
