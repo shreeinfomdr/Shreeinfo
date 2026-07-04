@@ -25,8 +25,15 @@ function CountUp({ target, suffix }: { target: number; suffix: string }) {
   const [count, setCount] = useState(0);
   const ref = useRef<HTMLDivElement>(null);
   const counted = useRef(false);
+  const timerRef = useRef<NodeJS.Timeout | null>(null);
 
   useEffect(() => {
+    // If target updates dynamically after we've already started counting, jump to it
+    if (counted.current) {
+      setCount(target);
+      return;
+    }
+
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting && !counted.current) {
@@ -35,11 +42,12 @@ function CountUp({ target, suffix }: { target: number; suffix: string }) {
           const steps = 60;
           const increment = target / steps;
           let current = 0;
-          const timer = setInterval(() => {
+          
+          timerRef.current = setInterval(() => {
             current += increment;
             if (current >= target) {
               setCount(target);
-              clearInterval(timer);
+              if (timerRef.current) clearInterval(timerRef.current);
             } else {
               setCount(Math.floor(current));
             }
@@ -49,7 +57,11 @@ function CountUp({ target, suffix }: { target: number; suffix: string }) {
       { threshold: 0.3 }
     );
     if (ref.current) observer.observe(ref.current);
-    return () => observer.disconnect();
+    
+    return () => {
+      observer.disconnect();
+      if (timerRef.current) clearInterval(timerRef.current);
+    };
   }, [target]);
 
   return <div ref={ref} className={styles.statNumber}>{count}{suffix}</div>;
