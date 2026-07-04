@@ -3,18 +3,18 @@ import Link from 'next/link';
 import Image from 'next/image';
 
 const allProducts = [
-  { title: "Laptop", img: "https://bytebiz.fra1.cdn.digitaloceanspaces.com/byte-qr/5797/mini-web/24631757307501936.jpg" },
-  { title: "Desktop", img: "https://bytebiz.fra1.cdn.digitaloceanspaces.com/byte-qr/5797/mini-web/63581757307522206.jpg" },
-  { title: "Gaming Pc", img: "https://bytebiz.fra1.cdn.digitaloceanspaces.com/byte-qr/5797/mini-web/48731757307594811.jpg" },
-  { title: "Printer", img: "https://bytebiz.fra1.cdn.digitaloceanspaces.com/byte-qr/5797/mini-web/14251757307641271.jpg" },
-  { title: "Cctv & security surveillance", img: "https://bytebiz.fra1.cdn.digitaloceanspaces.com/byte-qr/5797/mini-web/70201757307743990.jpg" },
-  { title: "Laptop & Computer accessories", img: "https://bytebiz.fra1.cdn.digitaloceanspaces.com/byte-qr/5797/mini-web/77221757307809866.png" },
-  { title: "Laptop battery", img: "https://bytebiz.fra1.cdn.digitaloceanspaces.com/byte-qr/5797/mini-web/68171757311828466.jpg" },
-  { title: "Laptop Charger", img: "https://bytebiz.fra1.cdn.digitaloceanspaces.com/byte-qr/5797/mini-web/34541757311860479.jpg" },
-  { title: "Screen", img: "https://bytebiz.fra1.cdn.digitaloceanspaces.com/byte-qr/5797/mini-web/83521757311909857.jpg" },
-  { title: "Laptop Hinges", img: "https://bytebiz.fra1.cdn.digitaloceanspaces.com/byte-qr/5797/mini-web/26231757311947799.jpeg" },
-  { title: "Speakar", img: "https://bytebiz.fra1.cdn.digitaloceanspaces.com/byte-qr/5797/mini-web/15521757311986225.jpg" },
-  { title: "Keyboard", img: "https://bytebiz.fra1.cdn.digitaloceanspaces.com/byte-qr/5797/mini-web/50431757312023001.jpg" }
+  { title: "Laptop", img: "https://images.unsplash.com/photo-1496181133206-80ce9b88a853?auto=format&fit=crop&w=800&q=80" },
+  { title: "Desktop", img: "https://images.unsplash.com/photo-1593640408182-31c70c8268f5?auto=format&fit=crop&w=800&q=80" },
+  { title: "Gaming Pc", img: "https://images.unsplash.com/photo-1587202372775-e229f172b9d7?auto=format&fit=crop&w=800&q=80" },
+  { title: "Printer", img: "https://images.unsplash.com/photo-1612815154858-60aa4c59eaa6?auto=format&fit=crop&w=800&q=80" },
+  { title: "Cctv & security surveillance", img: "https://images.unsplash.com/photo-1557597774-9d273605dfa9?auto=format&fit=crop&w=800&q=80" },
+  { title: "Laptop & Computer accessories", img: "https://images.unsplash.com/photo-1527864550417-7fd91fc51a46?auto=format&fit=crop&w=800&q=80" },
+  { title: "Laptop battery", img: "https://images.unsplash.com/photo-1601524909162-ae8725290836?auto=format&fit=crop&w=800&q=80" },
+  { title: "Laptop Charger", img: "https://images.unsplash.com/photo-1583863788434-e58a36330cf0?auto=format&fit=crop&w=800&q=80" },
+  { title: "Screen", img: "https://images.unsplash.com/photo-1517430816045-df4b7de11d1d?auto=format&fit=crop&w=800&q=80" },
+  { title: "Laptop Hinges", img: "https://images.unsplash.com/photo-1597872200969-2b65d56bd16b?auto=format&fit=crop&w=800&q=80" },
+  { title: "Speakar", img: "https://images.unsplash.com/photo-1545454675-3531b543be5d?auto=format&fit=crop&w=800&q=80" },
+  { title: "Keyboard", img: "https://images.unsplash.com/photo-1595225476474-87563907a212?auto=format&fit=crop&w=800&q=80" }
 ];
 
 export default function ProductsPage() {
