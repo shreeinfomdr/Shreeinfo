@@ -43,17 +43,25 @@ export default function Products() {
                 <p className={styles.cardDesc}>{product.description}</p>
               </div>
               <div className={styles.cardActions}>
-                <button className={styles.btnInquiry} onClick={scrollToInquiry}>
-                  Inquiry
-                </button>
-                <a
-                  href={`https://wa.me/+919879713381?text=Hi! I am interested in ${product.name}. Kindly connect.`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className={styles.btnWhatsapp}
-                >
-                  💬 WhatsApp
-                </a>
+                {product.name === 'Refurbished & Used Laptops' ? (
+                  <a href="/refurbished" className="btn btn-primary" style={{ width: '100%' }}>
+                    View Available Laptops
+                  </a>
+                ) : (
+                  <>
+                    <button className={styles.btnInquiry} onClick={scrollToInquiry}>
+                      Inquiry
+                    </button>
+                    <a
+                      href={`https://wa.me/+919879713381?text=${encodeURIComponent(`Hi! I am interested in ${product.name}. Kindly connect.`)}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className={styles.btnWhatsapp}
+                    >
+                      💬 WhatsApp
+                    </a>
+                  </>
+                )}
               </div>
             </div>
           ))}
