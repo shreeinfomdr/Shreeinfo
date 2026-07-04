@@ -58,6 +58,12 @@ export default function Products() {
             </div>
           ))}
         </div>
+
+        <div style={{ display: 'flex', justifyContent: 'center', marginTop: '60px' }}>
+          <a href="/products" className="btn btn-outline" style={{ padding: '14px 32px', fontSize: '1.1rem' }}>
+            View More Products →
+          </a>
+        </div>
       </div>
     </section>
   );
