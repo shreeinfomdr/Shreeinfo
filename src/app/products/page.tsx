@@ -35,8 +35,14 @@ export default function ProductsPage() {
               <div style={{ position: 'relative', width: '100%', height: '200px', marginBottom: '16px', borderRadius: '12px', overflow: 'hidden' }}>
                 <Image src={p.img} alt={p.title} fill style={{ objectFit: 'cover' }} unoptimized />
               </div>
-              <h3 style={{ fontSize: '1.2rem', marginBottom: '8px', textAlign: 'center' }}>{p.title}</h3>
-              <p style={{ color: '#3b82f6', fontSize: '0.85rem', fontWeight: 500, textAlign: 'center', marginBottom: '20px', flex: 1 }}>{p.brands}</p>
+              <h3 style={{ fontSize: '1.2rem', marginBottom: '12px', textAlign: 'center', color: '#f1f5f9' }}>{p.title}</h3>
+              <div style={{ display: 'flex', flexWrap: 'wrap', gap: '6px', justifyContent: 'center', marginBottom: '20px', flex: 1, alignContent: 'flex-start' }}>
+                {p.brands.split(', ').map((brand, idx) => (
+                  <span key={idx} style={{ padding: '4px 12px', background: 'linear-gradient(135deg, rgba(59,130,246,0.15), rgba(139,92,246,0.15))', color: '#93c5fd', border: '1px solid rgba(59,130,246,0.3)', borderRadius: '20px', fontSize: '0.75rem', fontWeight: 700, letterSpacing: '0.5px', textTransform: 'uppercase' }}>
+                    {brand}
+                  </span>
+                ))}
+              </div>
               <div style={{ display: 'flex', gap: '12px', justifyContent: 'center' }}>
                 <Link href="/#inquiry" className="btn btn-outline" style={{ flex: 1, padding: '10px 0' }}>Inquiry</Link>
                 <a href={`https://wa.me/+919879713381?text=Hi! I am interested in ${p.title}. Kindly connect.`} target="_blank" rel="noopener noreferrer" className="btn btn-whatsapp" style={{ flex: 1, padding: '10px 0' }}>WhatsApp</a>
