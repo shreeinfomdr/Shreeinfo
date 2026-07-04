@@ -3,18 +3,18 @@ import Link from 'next/link';
 import Image from 'next/image';
 
 const allProducts = [
-  { title: "Laptop", img: "https://images.unsplash.com/photo-1496181133206-80ce9b88a853?auto=format&fit=crop&w=800&q=80" },
-  { title: "Desktop", img: "https://images.unsplash.com/photo-1593640408182-31c70c8268f5?auto=format&fit=crop&w=800&q=80" },
-  { title: "Gaming Pc", img: "https://images.unsplash.com/photo-1587202372775-e229f172b9d7?auto=format&fit=crop&w=800&q=80" },
-  { title: "Printer", img: "https://images.unsplash.com/photo-1612815154858-60aa4c59eaa6?auto=format&fit=crop&w=800&q=80" },
-  { title: "Cctv & security surveillance", img: "https://bytebiz.fra1.cdn.digitaloceanspaces.com/byte-qr/5797/mini-web/70201757307743990.jpg" },
-  { title: "Laptop & Computer accessories", img: "https://bytebiz.fra1.cdn.digitaloceanspaces.com/byte-qr/5797/mini-web/77221757307809866.png" },
-  { title: "Laptop battery", img: "https://bytebiz.fra1.cdn.digitaloceanspaces.com/byte-qr/5797/mini-web/68171757311828466.jpg" },
-  { title: "Laptop Charger", img: "https://images.unsplash.com/photo-1583863788434-e58a36330cf0?auto=format&fit=crop&w=800&q=80" },
-  { title: "Screen", img: "https://images.unsplash.com/photo-1517430816045-df4b7de11d1d?auto=format&fit=crop&w=800&q=80" },
-  { title: "Laptop Hinges", img: "https://bytebiz.fra1.cdn.digitaloceanspaces.com/byte-qr/5797/mini-web/26231757311947799.jpeg" },
-  { title: "Speakar", img: "https://images.unsplash.com/photo-1545454675-3531b543be5d?auto=format&fit=crop&w=800&q=80" },
-  { title: "Keyboard", img: "https://images.unsplash.com/photo-1595225476474-87563907a212?auto=format&fit=crop&w=800&q=80" }
+  { title: "Laptop", img: "https://images.unsplash.com/photo-1496181133206-80ce9b88a853?auto=format&fit=crop&w=800&q=80", brands: "HP, Dell, Lenovo, ASUS, Acer, Apple" },
+  { title: "Desktop", img: "https://images.unsplash.com/photo-1593640408182-31c70c8268f5?auto=format&fit=crop&w=800&q=80", brands: "HP, Dell, Lenovo, ASUS, Custom Builds" },
+  { title: "Gaming Pc", img: "https://images.unsplash.com/photo-1587202372775-e229f172b9d7?auto=format&fit=crop&w=800&q=80", brands: "ASUS ROG, MSI, Gigabyte, Corsair" },
+  { title: "Printer", img: "https://images.unsplash.com/photo-1612815154858-60aa4c59eaa6?auto=format&fit=crop&w=800&q=80", brands: "HP, Canon, Epson, Brother" },
+  { title: "Cctv & security surveillance", img: "https://bytebiz.fra1.cdn.digitaloceanspaces.com/byte-qr/5797/mini-web/70201757307743990.jpg", brands: "CP Plus, Hikvision, Dahua, Godrej" },
+  { title: "Laptop & Computer accessories", img: "https://bytebiz.fra1.cdn.digitaloceanspaces.com/byte-qr/5797/mini-web/77221757307809866.png", brands: "Logitech, Dell, HP, Zebronics, Portronics" },
+  { title: "Laptop battery", img: "https://bytebiz.fra1.cdn.digitaloceanspaces.com/byte-qr/5797/mini-web/68171757311828466.jpg", brands: "HP, Dell, Lenovo, Acer, ASUS (OEM & Compatible)" },
+  { title: "Laptop Charger", img: "https://images.unsplash.com/photo-1583863788434-e58a36330cf0?auto=format&fit=crop&w=800&q=80", brands: "Original & Compatible Adapters for All Brands" },
+  { title: "Screen", img: "https://images.unsplash.com/photo-1517430816045-df4b7de11d1d?auto=format&fit=crop&w=800&q=80", brands: "LG, Samsung, Dell, Acer, AOC, BenQ" },
+  { title: "Laptop Hinges", img: "https://bytebiz.fra1.cdn.digitaloceanspaces.com/byte-qr/5797/mini-web/26231757311947799.jpeg", brands: "OEM Replacements for HP, Dell, Lenovo, ASUS" },
+  { title: "Speakar", img: "https://images.unsplash.com/photo-1545454675-3531b543be5d?auto=format&fit=crop&w=800&q=80", brands: "JBL, Sony, Zebronics, F&D, Boat" },
+  { title: "Keyboard", img: "https://images.unsplash.com/photo-1595225476474-87563907a212?auto=format&fit=crop&w=800&q=80", brands: "Logitech, TVS, Dell, HP, Redragon" }
 ];
 
 export default function ProductsPage() {
@@ -32,10 +32,11 @@ export default function ProductsPage() {
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', gap: '30px' }}>
           {allProducts.map((p, i) => (
             <div key={i} className="glass-card" style={{ padding: '20px', display: 'flex', flexDirection: 'column', height: '100%' }}>
-              <div style={{ position: 'relative', width: '100%', height: '200px', marginBottom: '20px', borderRadius: '12px', overflow: 'hidden' }}>
+              <div style={{ position: 'relative', width: '100%', height: '200px', marginBottom: '16px', borderRadius: '12px', overflow: 'hidden' }}>
                 <Image src={p.img} alt={p.title} fill style={{ objectFit: 'cover' }} unoptimized />
               </div>
-              <h3 style={{ fontSize: '1.2rem', marginBottom: '20px', flex: 1, textAlign: 'center' }}>{p.title}</h3>
+              <h3 style={{ fontSize: '1.2rem', marginBottom: '8px', textAlign: 'center' }}>{p.title}</h3>
+              <p style={{ color: '#3b82f6', fontSize: '0.85rem', fontWeight: 500, textAlign: 'center', marginBottom: '20px', flex: 1 }}>{p.brands}</p>
               <div style={{ display: 'flex', gap: '12px', justifyContent: 'center' }}>
                 <Link href="/#inquiry" className="btn btn-outline" style={{ flex: 1, padding: '10px 0' }}>Inquiry</Link>
                 <a href={`https://wa.me/+919879713381?text=Hi! I am interested in ${p.title}. Kindly connect.`} target="_blank" rel="noopener noreferrer" className="btn btn-whatsapp" style={{ flex: 1, padding: '10px 0' }}>WhatsApp</a>
