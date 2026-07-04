@@ -4,7 +4,7 @@
 .footerContent { max-width: 1200px; margin: 0 auto; padding: 60px 24px 30px; display: grid; grid-template-columns: 1.2fr 0.8fr 1fr; gap: 48px; }
 .brand { display: flex; flex-direction: column; gap: 12px; }
 .brandLogo { display: flex; align-items: center; gap: 12px; }
-.brandLogo img { max-height: 50px; border-radius: 10px; }
+.brandLogo img { border-radius: 10px; object-fit: contain; }
 .brandName { font-size: 1.3rem; font-weight: 800; background: linear-gradient(135deg, #3b82f6, #8b5cf6); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
 .tagline { color: rgba(255,255,255,0.45); font-size: 0.9rem; line-height: 1.6; max-width: 280px; }
 .colTitle { font-size: 1.05rem; font-weight: 700; color: #f1f5f9; margin-bottom: 24px; position: relative; padding-bottom: 12px; }
