@@ -16,6 +16,9 @@ const stats = [
   { target: 70, suffix: '+', label: 'Google Reviews', icon: (
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
   )},
+  { target: 25000, suffix: '+', label: 'Website Visits', icon: (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+  )},
 ];
 
 function CountUp({ target, suffix }: { target: number; suffix: string }) {
@@ -61,13 +64,20 @@ export default function About() {
 
         <div className={styles.grid}>
           <div className={styles.statsGrid}>
-            {stats.map((stat, i) => (
-              <div className={styles.statCard} key={i}>
-                <div className={styles.statIcon}>{stat.icon}</div>
-                <CountUp target={stat.target} suffix={stat.suffix} />
-                <div className={styles.statLabel}>{stat.label}</div>
-              </div>
-            ))}
+            {stats.map((stat, i) => {
+              const isLastOdd = i === stats.length - 1 && stats.length % 2 !== 0;
+              return (
+                <div 
+                  className={styles.statCard} 
+                  key={i}
+                  style={isLastOdd ? { gridColumn: '1 / -1', maxWidth: '320px', margin: '0 auto', width: '100%' } : {}}
+                >
+                  <div className={styles.statIcon}>{stat.icon}</div>
+                  <CountUp target={stat.target} suffix={stat.suffix} />
+                  <div className={styles.statLabel}>{stat.label}</div>
+                </div>
+              );
+            })}
           </div>
 
           <div className={styles.descriptionCard}>
