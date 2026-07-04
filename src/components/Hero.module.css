@@ -48,6 +48,14 @@
   margin: 0 auto;
   padding: 120px 24px 80px;
   width: 100%;
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 40px;
+  align-items: center;
+}
+
+.contentLeft {
+  max-width: 700px;
 }
 
 .badge {
@@ -200,6 +208,89 @@
   animation: float 6s ease-in-out infinite 2s;
 }
 
+/* ========== Terminal Animation ========== */
+
+.terminalContainer {
+  background: rgba(10, 15, 28, 0.7);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+  animation: fadeInUp 1s ease 0.6s both;
+  width: 100%;
+  font-family: 'Fira Code', 'Courier New', Courier, monospace;
+}
+
+:global(.light) .terminalContainer {
+  background: rgba(255, 255, 255, 0.8);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.1);
+}
+
+.terminalHeader {
+  background: rgba(255, 255, 255, 0.05);
+  padding: 10px 16px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  position: relative;
+}
+
+:global(.light) .terminalHeader {
+  background: rgba(0, 0, 0, 0.03);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.termBtn {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+}
+
+.termTitle {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 0.8rem;
+  font-weight: 500;
+}
+
+:global(.light) .termTitle {
+  color: rgba(0, 0, 0, 0.5);
+}
+
+.terminalBody {
+  padding: 20px;
+  min-height: 180px;
+  color: #a78bfa;
+  font-size: 0.95rem;
+  line-height: 1.8;
+}
+
+:global(.light) .terminalBody {
+  color: #6d28d9;
+}
+
+.termLine {
+  margin-bottom: 4px;
+}
+
+.cursor {
+  display: inline-block;
+  animation: blink 1s step-end infinite;
+  color: #3b82f6;
+  font-weight: bold;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
 @keyframes fadeInUp {
   from { opacity: 0; transform: translateY(30px); }
   to { opacity: 1; transform: translateY(0); }
@@ -208,6 +299,14 @@
 @keyframes float {
   0%, 100% { transform: translateY(0); }
   50% { transform: translateY(-30px); }
+}
+
+@media (max-width: 900px) {
+  .content {
+    grid-template-columns: 1fr;
+    gap: 30px;
+    padding: 100px 24px 60px;
+  }
 }
 
 @media (max-width: 768px) {

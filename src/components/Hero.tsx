@@ -9,6 +9,62 @@ const slides = [
   '/images/hero-3.jpg',
 ];
 
+function TerminalAnimation() {
+  const [lines, setLines] = useState<string[]>([]);
+  const [currentLine, setCurrentLine] = useState(0);
+  const [currentChar, setCurrentChar] = useState(0);
+
+  const fullLines = [
+    "> Initializing system diagnostics...",
+    "> Analyzing hardware integrity... [OK]",
+    "> Compiling network protocols... [DONE]",
+    "> System Optimized. Ready."
+  ];
+
+  useEffect(() => {
+    if (currentLine >= fullLines.length) return;
+
+    const timeout = setTimeout(() => {
+      setLines(prev => {
+        const newLines = [...prev];
+        if (!newLines[currentLine]) newLines[currentLine] = '';
+        newLines[currentLine] = fullLines[currentLine].substring(0, currentChar + 1);
+        return newLines;
+      });
+
+      if (currentChar < fullLines[currentLine].length) {
+        setCurrentChar(prev => prev + 1);
+      } else {
+        setTimeout(() => {
+          setCurrentLine(prev => prev + 1);
+          setCurrentChar(0);
+        }, 800); // pause before next line
+      }
+    }, Math.random() * 30 + 30); // typing speed
+
+    return () => clearTimeout(timeout);
+  }, [currentLine, currentChar]);
+
+  return (
+    <div className={styles.terminalContainer}>
+      <div className={styles.terminalHeader}>
+        <div className={styles.termBtn} style={{ background: '#ff5f56' }} />
+        <div className={styles.termBtn} style={{ background: '#ffbd2e' }} />
+        <div className={styles.termBtn} style={{ background: '#27c93f' }} />
+        <div className={styles.termTitle}>shree-infotech-cli</div>
+      </div>
+      <div className={styles.terminalBody}>
+        {lines.map((line, i) => (
+          <div key={i} className={styles.termLine}>{line}</div>
+        ))}
+        {currentLine < fullLines.length && (
+          <span className={styles.cursor}>_</span>
+        )}
+      </div>
+    </div>
+  );
+}
+
 export default function Hero() {
   const [current, setCurrent] = useState(0);
 
@@ -40,23 +96,29 @@ export default function Hero() {
       <div className={styles.floatingOrb + ' ' + styles.orb3} />
 
       <div className={styles.content}>
-        <div className={styles.badge}>🚀 Since 2005</div>
-        <h1 className={styles.heading}>
-          Your Trusted{' '}
-          <span className={styles.headingGradient}>IT Partner</span>{' '}
-          in Mundra
-        </h1>
-        <p className={styles.subheading}>
-          From laptop sales to chip-level repairs, we deliver innovative technology
-          solutions that drive your business forward. Trusted by 1000+ clients across Gujarat.
-        </p>
-        <div className={styles.cta}>
-          <button className={styles.ctaPrimary} onClick={() => scrollTo('#inquiry')}>
-            Get in Touch →
-          </button>
-          <button className={styles.ctaSecondary} onClick={() => scrollTo('#products')}>
-            Our Products
-          </button>
+        <div className={styles.contentLeft}>
+          <div className={styles.badge}>🚀 Since 2005</div>
+          <h1 className={styles.heading}>
+            Your Trusted{' '}
+            <span className={styles.headingGradient}>IT Partner</span>{' '}
+            in Mundra
+          </h1>
+          <p className={styles.subheading}>
+            From laptop sales to chip-level repairs, we deliver innovative technology
+            solutions that drive your business forward. Trusted by 1000+ clients across Gujarat.
+          </p>
+          <div className={styles.cta}>
+            <button className={styles.ctaPrimary} onClick={() => scrollTo('#inquiry')}>
+              Get in Touch →
+            </button>
+            <button className={styles.ctaSecondary} onClick={() => scrollTo('#products')}>
+              Our Products
+            </button>
+          </div>
+        </div>
+        
+        <div className={styles.contentRight}>
+          <TerminalAnimation />
         </div>
       </div>
 
