@@ -40,7 +40,7 @@ export default function Hero() {
       <div className={styles.floatingOrb + ' ' + styles.orb3} />
 
       <div className={styles.content}>
-        <div className={styles.badge}>🚀 19+ Years of Excellence</div>
+        <div className={styles.badge}>🚀 Since 2005</div>
         <h1 className={styles.heading}>
           Your Trusted{' '}
           <span className={styles.headingGradient}>IT Partner</span>{' '}

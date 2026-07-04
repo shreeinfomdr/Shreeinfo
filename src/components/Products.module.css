@@ -1,6 +1,6 @@
 .products { padding: 100px 0; background: rgba(255,255,255,0.01); }
 .productsInner { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
-.grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; margin-top: 60px; }
+.grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 30px; margin-top: 60px; }
 .card { background: rgba(255,255,255,0.04); backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,0.08); border-radius: 20px; overflow: hidden; transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); }
 .card:hover { transform: translateY(-8px); border-color: rgba(59,130,246,0.3); box-shadow: 0 20px 60px rgba(59,130,246,0.12); }
 .imageWrapper { overflow: hidden; aspect-ratio: 4 / 3; position: relative; }

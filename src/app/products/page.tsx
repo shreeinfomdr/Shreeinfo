@@ -14,7 +14,9 @@ const allProducts = [
   { title: "Screen", img: "https://images.unsplash.com/photo-1517430816045-df4b7de11d1d?auto=format&fit=crop&w=800&q=80", brands: "LG, Samsung, Dell, Acer, AOC, BenQ" },
   { title: "Laptop Hinges", img: "https://bytebiz.fra1.cdn.digitaloceanspaces.com/byte-qr/5797/mini-web/26231757311947799.jpeg", brands: "OEM Replacements for HP, Dell, Lenovo, ASUS" },
   { title: "Speakar", img: "https://images.unsplash.com/photo-1545454675-3531b543be5d?auto=format&fit=crop&w=800&q=80", brands: "JBL, Sony, Zebronics, F&D, Boat" },
-  { title: "Keyboard", img: "https://images.unsplash.com/photo-1595225476474-87563907a212?auto=format&fit=crop&w=800&q=80", brands: "Logitech, TVS, Dell, HP, Redragon" }
+  { title: "Keyboard", img: "https://images.unsplash.com/photo-1595225476474-87563907a212?auto=format&fit=crop&w=800&q=80", brands: "Logitech, TVS, Dell, HP, Redragon" },
+  { title: "Refurbished Laptops", img: "https://images.unsplash.com/photo-1588872657578-7efd1f1555ed?auto=format&fit=crop&w=800&q=80", brands: "Dell, HP, Lenovo (High Quality Refurbished)" },
+  { title: "Old Laptops & Computers", img: "https://images.unsplash.com/photo-1541807084-5c52b6b3adef?auto=format&fit=crop&w=800&q=80", brands: "Affordable Second-Hand Systems" }
 ];
 
 export default function ProductsPage() {

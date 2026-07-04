@@ -4,7 +4,7 @@ import { useState, useEffect, useRef } from 'react';
 import styles from './About.module.css';
 
 const stats = [
-  { target: 19, suffix: '+', label: 'Years Experience', icon: (
+  { target: new Date().getFullYear() - 2005, suffix: '+', label: 'Years Experience', icon: (
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
   )},
   { target: 1000, suffix: '+', label: 'Happy Clients', icon: (
@@ -12,9 +12,6 @@ const stats = [
   )},
   { target: 5000, suffix: '+', label: 'Devices Repaired', icon: (
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
-  )},
-  { target: 24, suffix: '/7', label: 'Support Available', icon: (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
   )},
 ];
 
@@ -57,7 +54,7 @@ export default function About() {
     <section className={styles.about} id="about">
       <div className={styles.aboutInner}>
         <h2 className="section-title">About Us</h2>
-        <p className="section-subtitle">Delivering trusted IT solutions since 2006</p>
+        <p className="section-subtitle">Delivering trusted IT solutions since 2005</p>
 
         <div className={styles.grid}>
           <div className={styles.statsGrid}>
@@ -72,13 +69,13 @@ export default function About() {
 
           <div className={styles.descriptionCard}>
             <p>
-              Welcome to <strong>Shree Infotech</strong>, the leading technology solutions provider in Mundra, Gujarat. With 19 years of experience, we deliver innovative and reliable IT solutions that enhance productivity. From laptop and computer sales to service and maintenance, our experts drive business growth.
+              Welcome to <strong>Shree Infotech</strong>, founded by visionary experts who have been delivering trusted IT solutions since <strong>2005</strong>. We are Mundra's premier destination for comprehensive technology services, combining decades of hands-on experience with an unwavering commitment to quality.
             </p>
             <p>
-              <strong>Shree Infotech</strong> is a one-stop destination for all your IT needs, offering a wide range of services including computer and laptop sales, repairs, accessories, networking solutions, and software support. With a strong commitment to quality and reliability, we ensure that every product and service meets expectations.
+              Our journey started with a simple mission: to make technology reliable and accessible. Today, we stand proud as authorized partners for industry giants like ASUS and HAVCOM, specializing in everything from chip-level motherboard repairs to custom high-performance computer builds and enterprise networking solutions.
             </p>
             <p>
-              We believe in building lasting relationships through trust, transparency, and excellent service. Whether you need a quick laptop repair, professional IT consultancy, or complete digital solutions, we provide dependable support. Our mission is to make technology simple, accessible, and effective.
+              At Shree Infotech, we don't just sell products; we deliver peace of mind. Whether you need a critical data recovery, a fast laptop screen replacement, or a complete CCTV surveillance setup for your business, our experienced team ensures your technology works seamlessly for you.
             </p>
           </div>
         </div>
