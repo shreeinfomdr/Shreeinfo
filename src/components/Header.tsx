@@ -40,15 +40,12 @@ export default function Header() {
     <header className={`${styles.header} ${scrolled ? styles.headerScrolled : ''}`}>
       <div className={styles.headerInner}>
         <a href="#home" className={styles.brand} onClick={(e) => handleNavClick(e, '#home')}>
-          <Image
-            src="https://bytebiz.fra1.cdn.digitaloceanspaces.com/byte-qr/5797/mini-web/95331757321876518.jpg"
+          <img
+            src="/logo.png"
             alt="Shree Infotech Logo"
-            width={48}
-            height={48}
             className={styles.logo}
-            unoptimized
+            style={{ height: '48px', width: 'auto' }}
           />
-          <span className={styles.brandName}>Shree Infotech</span>
         </a>
 
         <nav className={styles.nav}>

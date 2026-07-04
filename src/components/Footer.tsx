@@ -8,8 +8,7 @@ export default function Footer() {
       <div className={styles.footerContent}>
         <div className={styles.brand}>
           <div className={styles.brandLogo}>
-            <img src="https://bytebiz.fra1.cdn.digitaloceanspaces.com/byte-qr/5797/mini-web/95331757321876518.jpg" alt="Shree Infotech" />
-            <span className={styles.brandName}>Shree Infotech</span>
+            <img src="/logo.png" alt="Shree Infotech" style={{ width: '100%', maxWidth: '280px', height: 'auto' }} />
           </div>
           <p className={styles.tagline}>Your trusted IT partner since 2006. Delivering innovative technology solutions in Mundra, Gujarat.</p>
         </div>

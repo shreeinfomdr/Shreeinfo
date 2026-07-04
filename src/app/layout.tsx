@@ -21,7 +21,7 @@ export const metadata: Metadata = {
     siteName: "Shree Infotech",
     images: [
       {
-        url: "https://bytebiz.fra1.cdn.digitaloceanspaces.com/byte-qr/5797/mini-web/95331757321876518.jpg",
+        url: "/logo.png",
         width: 800,
         height: 600,
       }
@@ -34,7 +34,7 @@ export const metadata: Metadata = {
     description: "Expert laptop repair, desktop sales, and IT solutions in Mundra.",
   },
   icons: {
-    icon: "https://bytebiz.fra1.cdn.digitaloceanspaces.com/byte-qr/5797/mini-web/95331757321876518.jpg",
+    icon: "/favicon.ico",
   },
   robots: "index, follow",
 };
