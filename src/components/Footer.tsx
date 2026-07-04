@@ -39,6 +39,22 @@ export default function Footer() {
             <a href="https://wa.me/+919879713381" target="_blank" rel="noopener noreferrer">WhatsApp Us</a>
           </div>
         </div>
+
+        <div>
+          <h3 className={styles.colTitle}>Working Hours</h3>
+          <div className={styles.contactItem} style={{ alignItems: 'flex-start' }}>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ marginTop: '2px' }}><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
+              <span style={{ color: '#e2e8f0', fontWeight: 600 }}>Mon - Sat</span>
+              <span>Morning: 10:30 AM - 1:30 PM</span>
+              <span>Evening: 4:00 PM - 9:00 PM</span>
+            </div>
+          </div>
+          <div className={styles.contactItem}>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><line x1="4.93" y1="4.93" x2="19.07" y2="19.07"/></svg>
+            <span style={{ color: '#ef4444', fontWeight: 500 }}>Sunday: Closed</span>
+          </div>
+        </div>
       </div>
 
       <div className={styles.bottomBar}>
