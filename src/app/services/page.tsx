@@ -35,8 +35,8 @@ export default function ServicesPage() {
               <div style={{ position: 'relative', width: '100%', height: '240px', marginBottom: '20px', borderRadius: '12px', overflow: 'hidden' }}>
                 <Image src={s.img} alt={s.title} fill style={{ objectFit: 'cover' }} unoptimized />
               </div>
-              <h3 style={{ fontSize: '1.2rem', marginBottom: '12px', textAlign: 'center' }}>{s.title}</h3>
-              <p style={{ color: 'rgba(255,255,255,0.7)', fontSize: '0.9rem', lineHeight: 1.5, textAlign: 'center', marginBottom: '20px', flex: 1 }}>{s.description}</p>
+              <h3 style={{ fontSize: '1.2rem', marginBottom: '12px', textAlign: 'center', color: 'var(--text-primary)' }}>{s.title}</h3>
+              <p style={{ color: 'var(--text-secondary)', fontSize: '0.9rem', lineHeight: 1.5, textAlign: 'center', marginBottom: '20px', flex: 1 }}>{s.description}</p>
               <div style={{ display: 'flex', gap: '12px', justifyContent: 'center' }}>
                 <Link href="/#inquiry" className="btn btn-outline" style={{ flex: 1, padding: '10px 0' }}>Inquiry</Link>
                 <a href={`https://wa.me/+919879713381?text=Hi! I am interested in ${s.title} service. Kindly connect.`} target="_blank" rel="noopener noreferrer" className="btn btn-whatsapp" style={{ flex: 1, padding: '10px 0' }}>WhatsApp</a>
