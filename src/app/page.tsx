@@ -5,6 +5,7 @@ import Products from '@/components/Products';
 import Services from '@/components/Services';
 import Videos from '@/components/Videos';
 import Certificates from '@/components/Certificates';
+import RefurbishedStore from '@/components/RefurbishedStore';
 import Brands from '@/components/Brands';
 import InquiryForm from '@/components/InquiryForm';
 import Testimonials from '@/components/Testimonials';
@@ -21,6 +22,7 @@ export default function Home() {
         <About />
         <Products />
         <Services />
+        <RefurbishedStore />
         <Videos />
         <Certificates />
         <Brands />

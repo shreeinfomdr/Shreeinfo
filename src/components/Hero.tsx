@@ -66,13 +66,28 @@ function TerminalAnimation() {
 }
 
 export default function Hero() {
-  const [current, setCurrent] = useState(0);
+  const [activeSlide, setActiveSlide] = useState(0);
+  const [content, setContent] = useState({
+    heroTitle: 'Premium IT Solutions Built for the Future',
+    heroSubtitle: 'Expert laptop repairs, custom PC builds, and enterprise networking solutions in Mundra, Gujarat.'
+  });
 
   useEffect(() => {
     const timer = setInterval(() => {
-      setCurrent((prev) => (prev + 1) % slides.length);
-    }, 5000);
+      setActiveSlide((prev) => (prev + 1) % slides.length);
+    }, 6000);
     return () => clearInterval(timer);
+  }, []);
+
+  useEffect(() => {
+    fetch('/api/admin/content')
+      .then(res => res.json())
+      .then(data => {
+        if (data && data.heroTitle) {
+          setContent(prev => ({ ...prev, heroTitle: data.heroTitle, heroSubtitle: data.heroSubtitle || prev.heroSubtitle }));
+        }
+      })
+      .catch(err => console.error(err));
   }, []);
 
   const scrollTo = (id: string) => {
@@ -84,7 +99,7 @@ export default function Hero() {
     <section className={styles.hero} id="home">
       <div className={styles.slideContainer}>
         {slides.map((src, i) => (
-          <div key={i} className={`${styles.slide} ${i === current ? styles.slideActive : ''}`}>
+          <div key={i} className={`${styles.slide} ${i === activeSlide ? styles.slideActive : ''}`}>
             <img src={src} alt={`Shree Infotech Banner ${i + 1}`} className={styles.slideImage} />
           </div>
         ))}
@@ -99,13 +114,14 @@ export default function Hero() {
         <div className={styles.contentLeft}>
           <div className={styles.badge}>🚀 Since 2005</div>
           <h1 className={styles.heading}>
-            Your Trusted{' '}
-            <span className={styles.headingGradient}>IT Partner</span>{' '}
-            in Mundra
+            {content.heroTitle.split(' ').map((word, i) => 
+              word.toLowerCase() === 'it' || word.toLowerCase() === 'solutions' || word.toLowerCase() === 'future' ? 
+              <span key={i} className={styles.headingGradient}>{word} </span> : 
+              word + ' '
+            )}
           </h1>
           <p className={styles.subheading}>
-            From laptop sales to chip-level repairs, we deliver innovative technology
-            solutions that drive your business forward. Trusted by 1000+ clients across Gujarat.
+            {content.heroSubtitle}
           </p>
           <div className={styles.cta}>
             <button className={styles.ctaPrimary} onClick={() => scrollTo('#inquiry')}>
