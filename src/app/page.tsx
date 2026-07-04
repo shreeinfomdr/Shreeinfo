@@ -5,7 +5,6 @@ import Products from '@/components/Products';
 import Services from '@/components/Services';
 import Videos from '@/components/Videos';
 import Certificates from '@/components/Certificates';
-import GoogleReviews from '@/components/GoogleReviews';
 import Brands from '@/components/Brands';
 import InquiryForm from '@/components/InquiryForm';
 import Testimonials from '@/components/Testimonials';
@@ -24,7 +23,6 @@ export default function Home() {
         <Services />
         <Videos />
         <Certificates />
-        <GoogleReviews />
         <Brands />
         <InquiryForm />
         <Testimonials />

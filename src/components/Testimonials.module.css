@@ -1,17 +1,17 @@
-.testimonials { padding: 100px 0; background: rgba(255,255,255,0.01); }
+.testimonials { padding: 100px 0; background: transparent; }
 .testimonialsInner { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
 .carouselWrap { max-width: 800px; margin: 60px auto 0; position: relative; overflow: hidden; border-radius: 24px; }
 .slidesContainer { display: flex; transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1); }
-.slide { min-width: 100%; padding: 48px 40px; background: rgba(255,255,255,0.04); backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,0.08); text-align: center; box-sizing: border-box; }
+.slide { min-width: 100%; padding: 48px 40px; background: var(--bg-card); backdrop-filter: blur(12px); border: 1px solid var(--border-color); text-align: center; box-sizing: border-box; }
 .quoteIcon { font-size: 3.5rem; background: linear-gradient(135deg, #3b82f6, #8b5cf6); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; opacity: 0.4; line-height: 1; margin-bottom: 16px; }
-.quoteText { font-size: 1.15rem; line-height: 1.85; color: rgba(255,255,255,0.8); font-style: italic; margin-bottom: 32px; max-width: 600px; margin-left: auto; margin-right: auto; }
+.quoteText { font-size: 1.15rem; line-height: 1.85; color: var(--text-secondary); font-style: italic; margin-bottom: 32px; max-width: 600px; margin-left: auto; margin-right: auto; }
 .authorPhoto { width: 72px; height: 72px; border-radius: 50%; object-fit: cover; border: 3px solid rgba(59,130,246,0.4); margin: 0 auto 16px; display: block; }
-.authorName { font-size: 1.1rem; font-weight: 700; color: #f1f5f9; margin-bottom: 4px; }
+.authorName { font-size: 1.1rem; font-weight: 700; color: var(--text-primary); margin-bottom: 4px; }
 .stars { color: #fbbf24; font-size: 1.1rem; letter-spacing: 4px; margin-top: 8px; }
 .dots { display: flex; justify-content: center; gap: 10px; margin-top: 32px; }
 .dot { width: 10px; height: 10px; border-radius: 50%; background: rgba(255,255,255,0.2); border: none; cursor: pointer; transition: all 0.3s ease; padding: 0; }
 .dotActive { background: linear-gradient(135deg, #3b82f6, #8b5cf6); transform: scale(1.3); box-shadow: 0 0 12px rgba(59,130,246,0.4); }
-.arrowBtn { position: absolute; top: 50%; transform: translateY(-50%); width: 44px; height: 44px; border-radius: 50%; background: rgba(255,255,255,0.08); backdrop-filter: blur(8px); border: 1px solid rgba(255,255,255,0.12); color: white; font-size: 1.2rem; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.3s ease; z-index: 2; }
+.arrowBtn { position: absolute; top: 50%; transform: translateY(-50%); width: 44px; height: 44px; border-radius: 50%; background: var(--bg-card); backdrop-filter: blur(8px); border: 1px solid var(--border-color); color: var(--text-primary); font-size: 1.2rem; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.3s ease; z-index: 2; }
 .arrowBtn:hover { background: rgba(255,255,255,0.15); border-color: rgba(59,130,246,0.4); }
 .arrowLeft { left: 12px; }
 .arrowRight { right: 12px; }
