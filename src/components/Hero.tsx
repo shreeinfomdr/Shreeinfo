@@ -142,8 +142,8 @@ export default function Hero() {
         {slides.map((_, i) => (
           <button
             key={i}
-            className={`${styles.dot} ${i === current ? styles.dotActive : ''}`}
-            onClick={() => setCurrent(i)}
+            className={`${styles.dot} ${i === activeSlide ? styles.dotActive : ''}`}
+            onClick={() => setActiveSlide(i)}
             aria-label={`Go to slide ${i + 1}`}
           />
         ))}

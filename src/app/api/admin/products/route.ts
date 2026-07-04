@@ -13,9 +13,9 @@ if (!useKV && !fs.existsSync(path.dirname(localDataPath))) {
 
 export async function GET() {
   try {
-    let products = [];
+    let products: any[] = [];
     if (useKV) {
-      products = await kv.get('refurbished_products') || [];
+      products = (await kv.get<any[]>('refurbished_products')) || [];
     } else {
       if (fs.existsSync(localDataPath)) {
         products = JSON.parse(fs.readFileSync(localDataPath, 'utf8'));
@@ -47,7 +47,7 @@ export async function POST(req: Request) {
 
     let products: any[] = [];
     if (useKV) {
-      products = await kv.get('refurbished_products') || [];
+      products = (await kv.get<any[]>('refurbished_products')) || [];
       if (!Array.isArray(products)) products = [];
       products.unshift(newProduct); // Add to beginning
       await kv.set('refurbished_products', products);
@@ -76,7 +76,7 @@ export async function PUT(req: Request) {
 
     let products: any[] = [];
     if (useKV) {
-      products = await kv.get('refurbished_products') || [];
+      products = (await kv.get<any[]>('refurbished_products')) || [];
       const index = products.findIndex((p: any) => p.id === id);
       if (index !== -1) {
         products[index] = { ...products[index], ...updates };
@@ -111,7 +111,7 @@ export async function DELETE(req: Request) {
 
     let products: any[] = [];
     if (useKV) {
-      products = await kv.get('refurbished_products') || [];
+      products = (await kv.get<any[]>('refurbished_products')) || [];
       products = products.filter((p: any) => p.id !== id);
       await kv.set('refurbished_products', products);
     } else {
