@@ -1,36 +1,60 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Shree Infotech - Next.js Website
 
-## Getting Started
+This is a modern, fast, and SEO-optimized website built for Shree Infotech using Next.js 15, React, and CSS Modules.
 
-First, run the development server:
+## 🚀 Local Development Setup
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+To run this website locally on your computer:
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+1. **Install Dependencies**
+   ```bash
+   npm install
+   ```
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+2. **Configure Email (Required for Inquiry Form)**
+   The inquiry form uses Nodemailer to send emails directly to your Gmail account. Google requires an "App Password" to allow this.
+   
+   - Go to your Google Account -> Security.
+   - Enable 2-Step Verification (if not already enabled).
+   - Search for **App Passwords** and create a new one (call it "Website").
+   - Copy the 16-letter code.
+   - Create a file named `.env.local` in the root of your project folder.
+   - Add the following line to the file, replacing the placeholder with your 16-letter code:
+     ```env
+     EMAIL_PASSWORD=your_16_letter_app_password_here
+     ```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+3. **Start the Development Server**
+   ```bash
+   npm run dev
+   ```
+   Open [http://localhost:3000](http://localhost:3000) in your browser.
 
-## Learn More
+## ☁️ Hosting on Vercel
 
-To learn more about Next.js, take a look at the following resources:
+This project is fully ready to be deployed on [Vercel](https://vercel.com).
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### Deployment Steps:
+1. Push this code to a GitHub repository.
+2. Log in to Vercel and click "Add New" -> "Project".
+3. Import your GitHub repository.
+4. Open the **Environment Variables** section in the Vercel deployment settings.
+5. Add the following variable:
+   - **Key:** `EMAIL_PASSWORD`
+   - **Value:** (your 16-letter Gmail app password)
+6. Click **Deploy**.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### ⚠️ Important Note About Vercel & Testimonials:
+Vercel uses a "serverless" architecture, which means it **cannot write files permanently** to its own filesystem (like `data/testimonials.json`). 
 
-## Deploy on Vercel
+Right now, the testimonial submission works perfectly on your local computer. However, once hosted on Vercel, new testimonials submitted by clients will disappear after a few hours because Vercel resets its filesystem.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+**To fix this for Vercel production:**
+You will need to connect a database (like Vercel KV, Supabase, or MongoDB) to store the testimonials permanently. The current API route (`src/app/api/testimonials/route.ts`) will need to be updated to write to the database instead of the local `.json` file.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## ✨ Features
+- **Next.js 15 App Router** for lightning-fast performance.
+- **Advanced SEO (JSON-LD)** to ensure you rank #1 for "Computer Repair Shop" in Mundra.
+- **Glassmorphism UI** with smooth CSS animations.
+- **Working Contact API** that sends emails directly to `shreeinfo.mdr@gmail.com`.
+- **Dynamic Testimonials** that fetch and display automatically.

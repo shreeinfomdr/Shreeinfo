@@ -32,7 +32,7 @@ export default function InquiryForm() {
         setStatus('error');
         alert('Failed to send inquiry. Please try again or contact us directly.');
       }
-    } catch (err) {
+    } catch {
       setStatus('error');
       alert('An error occurred. Please try again later.');
     }

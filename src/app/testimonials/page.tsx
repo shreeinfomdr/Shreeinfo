@@ -1,5 +1,6 @@
 'use client';
 import { useState } from 'react';
+import Link from 'next/link';
 import styles from './page.module.css';
 
 export default function TestimonialSubmit() {
@@ -32,7 +33,7 @@ export default function TestimonialSubmit() {
         setStatus('error');
         alert('Failed to submit testimonial. Please try again.');
       }
-    } catch (err) {
+    } catch {
       setStatus('error');
       alert('An error occurred. Please try again later.');
     }
@@ -90,7 +91,7 @@ export default function TestimonialSubmit() {
           </button>
         </form>
         
-        <a href="/" className={styles.backLink}>← Back to Home</a>
+        <Link href="/" className={styles.backLink}>← Back to Home</Link>
       </div>
     </div>
   );
