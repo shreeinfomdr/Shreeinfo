@@ -65,29 +65,17 @@ function TerminalAnimation() {
   );
 }
 
-export default function Hero() {
+export default function Hero({ content }: { content?: any }) {
   const [activeSlide, setActiveSlide] = useState(0);
-  const [content, setContent] = useState({
-    heroTitle: 'Premium IT Solutions Built for the Future',
-    heroSubtitle: 'Expert laptop repairs, custom PC builds, and enterprise networking solutions in Mundra, Gujarat.'
-  });
+
+  const heroTitle = content?.heroTitle || 'Premium IT Solutions Built for the Future';
+  const heroSubtitle = content?.heroSubtitle || 'Expert laptop repairs, custom PC builds, and enterprise networking solutions in Mundra, Gujarat.';
 
   useEffect(() => {
     const timer = setInterval(() => {
       setActiveSlide((prev) => (prev + 1) % slides.length);
     }, 6000);
     return () => clearInterval(timer);
-  }, []);
-
-  useEffect(() => {
-    fetch('/api/admin/content')
-      .then(res => res.json())
-      .then(data => {
-        if (data && data.heroTitle) {
-          setContent(prev => ({ ...prev, heroTitle: data.heroTitle, heroSubtitle: data.heroSubtitle || prev.heroSubtitle }));
-        }
-      })
-      .catch(err => console.error(err));
   }, []);
 
   const scrollTo = (id: string) => {
@@ -114,14 +102,14 @@ export default function Hero() {
         <div className={styles.contentLeft}>
           <div className={styles.badge}>🚀 Since 2005</div>
           <h1 className={styles.heading}>
-            {content.heroTitle.split(' ').map((word, i) => 
+            {heroTitle.split(' ').map((word: string, i: number) => 
               word.toLowerCase() === 'it' || word.toLowerCase() === 'solutions' || word.toLowerCase() === 'future' ? 
               <span key={i} className={styles.headingGradient}>{word} </span> : 
               word + ' '
             )}
           </h1>
           <p className={styles.subheading}>
-            {content.heroSubtitle}
+            {heroSubtitle}
           </p>
           <div className={styles.cta}>
             <button className={styles.ctaPrimary} onClick={() => scrollTo('#inquiry')}>

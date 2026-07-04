@@ -67,8 +67,14 @@ function CountUp({ target, suffix }: { target: number; suffix: string }) {
   return <div ref={ref} className={styles.statNumber}>{count}{suffix}</div>;
 }
 
-export default function About() {
+export default function About({ content }: { content?: any }) {
   const [visits, setVisits] = useState(1000);
+
+  const aboutTitle = content?.aboutTitle || 'About Us';
+  const aboutSubtitle = content?.aboutSubtitle || 'Delivering trusted IT solutions since 2005';
+  const aboutP1 = content?.aboutP1 || 'Welcome to Shree Infotech, founded by visionary experts who have been delivering trusted IT solutions since 2005. We are Mundra\'s premier destination for comprehensive technology services, combining decades of hands-on experience with an unwavering commitment to quality.';
+  const aboutP2 = content?.aboutP2 || 'Our journey started with a simple mission: to make technology reliable and accessible. Today, we stand proud as authorized partners for industry giants like ASUS and HAVCOM, specializing in everything from chip-level motherboard repairs to custom high-performance computer builds and enterprise networking solutions.';
+  const aboutP3 = content?.aboutP3 || 'At Shree Infotech, we don\'t just sell products; we deliver peace of mind. Whether you need a critical data recovery, a fast laptop screen replacement, or a complete CCTV surveillance setup for your business, our experienced team ensures your technology works seamlessly for you.';
 
   useEffect(() => {
     // Increment and fetch live visitor count (starts from 1000 + API count)
@@ -85,8 +91,8 @@ export default function About() {
   return (
     <section className={styles.about} id="about">
       <div className={styles.aboutInner}>
-        <h2 className="section-title">About Us</h2>
-        <p className="section-subtitle">Delivering trusted IT solutions since 2005</p>
+        <h2 className="section-title">{aboutTitle}</h2>
+        <p className="section-subtitle">{aboutSubtitle}</p>
 
         <div className={styles.grid}>
           <div className={styles.statsGrid}>
@@ -129,15 +135,9 @@ export default function About() {
           </div>
 
           <div className={styles.descriptionCard}>
-            <p>
-              Welcome to <strong>Shree Infotech</strong>, founded by visionary experts who have been delivering trusted IT solutions since <strong>2005</strong>. We are Mundra's premier destination for comprehensive technology services, combining decades of hands-on experience with an unwavering commitment to quality.
-            </p>
-            <p>
-              Our journey started with a simple mission: to make technology reliable and accessible. Today, we stand proud as authorized partners for industry giants like ASUS and HAVCOM, specializing in everything from chip-level motherboard repairs to custom high-performance computer builds and enterprise networking solutions.
-            </p>
-            <p>
-              At Shree Infotech, we don't just sell products; we deliver peace of mind. Whether you need a critical data recovery, a fast laptop screen replacement, or a complete CCTV surveillance setup for your business, our experienced team ensures your technology works seamlessly for you.
-            </p>
+            <p>{aboutP1}</p>
+            <p>{aboutP2}</p>
+            {content?.aboutP3 && <p>{content.aboutP3}</p>}
           </div>
         </div>
       </div>

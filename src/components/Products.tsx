@@ -20,17 +20,20 @@ const products = [
   },
 ];
 
-export default function Products() {
+export default function Products({ content }: { content?: any }) {
   const scrollToInquiry = () => {
     const el = document.querySelector('#inquiry');
     if (el) el.scrollIntoView({ behavior: 'smooth' });
   };
 
+  const productsTitle = content?.productsTitle || 'Our Products';
+  const productsSubtitle = content?.productsSubtitle || 'Premium technology solutions for every need';
+
   return (
     <section className={styles.products} id="products">
       <div className={styles.productsInner}>
-        <h2 className="section-title">Our Products</h2>
-        <p className="section-subtitle">Premium technology solutions for every need</p>
+        <h2 className="section-title">{productsTitle}</h2>
+        <p className="section-subtitle">{productsSubtitle}</p>
 
         <div className={styles.grid}>
           {products.map((product) => (

@@ -1,7 +1,12 @@
 'use client';
 import styles from './Footer.module.css';
 
-export default function Footer() {
+export default function Footer({ content }: { content?: any }) {
+  const phone = content?.phoneNumber || '+91 98797 13381';
+  const email = content?.emailAddress || 'shreeinfo.mdr@gmail.com';
+  const hoursMorning = content?.workingHoursMorning || '10:30 AM - 1:30 PM';
+  const hoursEvening = content?.workingHoursEvening || '4:00 PM - 9:00 PM';
+
   return (
     <footer className={styles.footer}>
       <div className={styles.gradientBorder} />
@@ -28,7 +33,8 @@ export default function Footer() {
           <h3 className={styles.colTitle}>Contact Info</h3>
           <div className={styles.contactItem}>
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
-            <a href="tel:+919879713381">+91 9879713381</a>
+            <p>Email: {email}</p>
+            <p>Phone: {phone}</p>
           </div>
           <div className={styles.contactItem}>
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
@@ -45,9 +51,10 @@ export default function Footer() {
           <div className={styles.contactItem} style={{ alignItems: 'flex-start' }}>
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ marginTop: '2px' }}><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
-              <span style={{ color: 'var(--text-primary)', fontWeight: 600 }}>Mon - Sat</span>
-              <span>Morning: 10:30 AM - 1:30 PM</span>
-              <span>Evening: 4:00 PM - 9:00 PM</span>
+              <p>Mon - Sat</p>
+              <p>Morning: {hoursMorning}</p>
+              <p>Evening: {hoursEvening}</p>
+              <p>Sunday: Closed</p>
             </div>
           </div>
           <div className={styles.contactItem}>

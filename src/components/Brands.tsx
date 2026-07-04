@@ -7,12 +7,15 @@ const brands = [
   { name: 'Anti Virus', image: 'https://bytebiz.fra1.cdn.digitaloceanspaces.com/byte-qr/5797/mini-web/49251757322295718.jpg' },
 ];
 
-export default function Brands() {
+export default function Brands({ content }: { content?: any }) {
+  const brandsTitle = content?.brandsTitle || 'Brands We Deal In';
+  const brandsSubtitle = content?.brandsSubtitle || 'We provide sales and service for all major technology brands.';
+
   return (
     <section className={styles.brands} id="brands">
       <div className={styles.brandsInner}>
-        <h2 className="section-title">Brands We Deal In</h2>
-        <p className="section-subtitle">Authorized dealer for leading technology brands</p>
+        <h2 className="section-title">{brandsTitle}</h2>
+        <p className="section-subtitle">{brandsSubtitle}</p>
         <div className={styles.grid}>
           {brands.map((brand) => (
             <div className={styles.card} key={brand.name}>

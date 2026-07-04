@@ -8,14 +8,16 @@ const videos = [
   { id: '3fiJAVuksVU', title: 'Shree Infotech' },
 ];
 
-export default function Videos() {
+export default function Videos({ content }: { content?: any }) {
   const [activeVideo, setActiveVideo] = useState<string | null>(null);
+  const videosTitle = content?.videosTitle || 'Tech Insights & Repairs';
+  const videosSubtitle = content?.videosSubtitle || 'Watch our expert technicians in action and learn more about technology.';
 
   return (
     <section className={styles.videos} id="videos">
       <div className={styles.videosInner}>
-        <h2 className="section-title">Videos</h2>
-        <p className="section-subtitle">Watch our work in action</p>
+        <h2 className="section-title">{videosTitle}</h2>
+        <p className="section-subtitle">{videosSubtitle}</p>
         <div className={styles.grid}>
           {videos.map((video) => (
             <div key={video.id} className={styles.card} onClick={() => setActiveVideo(video.id)}>

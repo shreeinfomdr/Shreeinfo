@@ -1,4 +1,5 @@
 'use client';
+import { useState } from 'react';
 import styles from './Services.module.css';
 
 const services = [
@@ -22,12 +23,17 @@ const services = [
   },
 ];
 
-export default function Services() {
+export default function Services({ content }: { content?: any }) {
+  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
+
+  const servicesTitle = content?.servicesTitle || 'Our Services';
+  const servicesSubtitle = content?.servicesSubtitle || 'Comprehensive IT solutions for businesses and individuals';
+
   return (
     <section className={styles.services} id="services">
       <div className={styles.servicesInner}>
-        <h2 className="section-title">Our Services</h2>
-        <p className="section-subtitle">Expert repairs and solutions you can trust</p>
+        <h2 className="section-title">{servicesTitle}</h2>
+        <p className="section-subtitle">{servicesSubtitle}</p>
         <div className={styles.grid}>
           {services.map((service) => (
             <div className={styles.card} key={service.title}>

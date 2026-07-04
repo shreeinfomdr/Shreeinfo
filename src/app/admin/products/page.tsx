@@ -17,8 +17,9 @@ export default function AdminProducts() {
   // Form state
   const [isAdding, setIsAdding] = useState(false);
   const [title, setTitle] = useState('');
-  const [image, setImage] = useState('');
+  const [imageFile, setImageFile] = useState<File | null>(null);
   const [specs, setSpecs] = useState('');
+  const [uploading, setUploading] = useState(false);
 
   useEffect(() => {
     fetchProducts();
@@ -40,20 +41,37 @@ export default function AdminProducts() {
 
   const handleAdd = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (!imageFile) return alert('Please select an image file first.');
+    
+    setUploading(true);
     try {
+      // 1. Upload file to Vercel Blob
+      const uploadRes = await fetch(`/api/admin/upload?filename=${encodeURIComponent(imageFile.name)}`, {
+        method: 'POST',
+        body: imageFile,
+      });
+      const blob = await uploadRes.json();
+      
+      if (!uploadRes.ok) throw new Error(blob.error || 'Upload failed');
+      
+      const imageUrl = blob.url;
+
+      // 2. Save product
       const res = await fetch('/api/admin/products', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ title, image, specs }),
+        body: JSON.stringify({ title, image: imageUrl, specs }),
       });
       const data = await res.json();
       if (data.success) {
         setProducts([data.product, ...products]);
         setIsAdding(false);
-        setTitle(''); setImage(''); setSpecs('');
+        setTitle(''); setImageFile(null); setSpecs('');
       }
     } catch (err) {
-      alert('Error adding product');
+      alert('Error adding product or uploading image.');
+    } finally {
+      setUploading(false);
     }
   };
 
@@ -109,9 +127,14 @@ export default function AdminProducts() {
           </div>
 
           <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
-            <label style={{ fontSize: '0.9rem', fontWeight: 600 }}>Image URL</label>
-            <input required value={image} onChange={e => setImage(e.target.value)} placeholder="e.g. https://imgur.com/your-image.jpg" style={{ padding: '10px', borderRadius: '6px', border: '1px solid #cbd5e1' }} />
-            <small style={{ color: '#64748b' }}>Upload your image to an image host or your CDN and paste the direct link here.</small>
+            <label style={{ fontSize: '0.9rem', fontWeight: 600 }}>Laptop Image</label>
+            <input 
+              type="file" 
+              accept="image/*"
+              required 
+              onChange={e => e.target.files && setImageFile(e.target.files[0])} 
+              style={{ padding: '10px', borderRadius: '6px', border: '1px solid #cbd5e1' }} 
+            />
           </div>
 
           <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
@@ -119,8 +142,8 @@ export default function AdminProducts() {
             <textarea required value={specs} onChange={e => setSpecs(e.target.value)} rows={4} placeholder="e.g. Intel Core i5 8th Gen, 16GB RAM, 512GB SSD..." style={{ padding: '10px', borderRadius: '6px', border: '1px solid #cbd5e1' }} />
           </div>
 
-          <button type="submit" style={{ background: '#10b981', color: 'white', border: 'none', padding: '12px', borderRadius: '8px', cursor: 'pointer', fontWeight: '600', marginTop: '8px' }}>
-            Save Laptop
+          <button type="submit" disabled={uploading} style={{ background: '#10b981', color: 'white', border: 'none', padding: '12px', borderRadius: '8px', cursor: uploading ? 'not-allowed' : 'pointer', opacity: uploading ? 0.7 : 1, fontWeight: '600', marginTop: '8px' }}>
+            {uploading ? 'Uploading & Saving...' : 'Save Laptop'}
           </button>
         </form>
       )}
