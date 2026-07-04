@@ -1,0 +1,14 @@
+.social { padding: 100px 0; }
+.socialInner { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+.grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; max-width: 700px; margin: 60px auto 0; }
+.linkCard { background: rgba(255,255,255,0.04); backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,0.08); border-radius: 16px; padding: 28px 20px; display: flex; flex-direction: column; align-items: center; gap: 12px; text-decoration: none; color: #f1f5f9; transition: all 0.3s ease; }
+.linkCard:hover { transform: translateY(-4px); }
+.linkCard svg { width: 36px; height: 36px; }
+.linkLabel { font-weight: 600; font-size: 0.9rem; }
+.whatsapp:hover { border-color: #25D366; box-shadow: 0 8px 30px rgba(37,211,102,0.2); }
+.website:hover { border-color: #3b82f6; box-shadow: 0 8px 30px rgba(59,130,246,0.2); }
+.location:hover { border-color: #ef4444; box-shadow: 0 8px 30px rgba(239,68,68,0.2); }
+.facebook:hover { border-color: #1877F2; box-shadow: 0 8px 30px rgba(24,119,242,0.2); }
+.youtube:hover { border-color: #FF0000; box-shadow: 0 8px 30px rgba(255,0,0,0.2); }
+.instagram:hover { border-color: #E4405F; box-shadow: 0 8px 30px rgba(228,64,95,0.2); }
+@media (max-width: 600px) { .grid { grid-template-columns: repeat(2, 1fr); } .social { padding: 60px 0; } }

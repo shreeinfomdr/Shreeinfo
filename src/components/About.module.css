@@ -1,0 +1,17 @@
+.about { padding: 100px 0; }
+.aboutInner { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+.grid { display: grid; grid-template-columns: 1fr 1.5fr; gap: 48px; align-items: start; margin-top: 60px; }
+.statsGrid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+.statCard { background: rgba(255,255,255,0.04); backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,0.08); border-radius: 20px; padding: 32px 20px; text-align: center; transition: all 0.3s ease; }
+.statCard:hover { border-color: rgba(59,130,246,0.3); box-shadow: 0 0 30px rgba(59,130,246,0.1); transform: translateY(-4px); }
+.statIcon { width: 48px; height: 48px; margin: 0 auto 16px; display: flex; align-items: center; justify-content: center; border-radius: 12px; background: rgba(59,130,246,0.1); }
+.statIcon svg { width: 24px; height: 24px; color: #60a5fa; }
+.statNumber { font-size: clamp(2rem, 4vw, 2.8rem); font-weight: 800; background: linear-gradient(135deg, #3b82f6, #8b5cf6); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; line-height: 1.1; }
+.statLabel { color: rgba(255,255,255,0.6); font-size: 0.9rem; font-weight: 500; margin-top: 6px; }
+.descriptionCard { background: rgba(255,255,255,0.04); backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,0.08); border-radius: 24px; padding: 40px; position: relative; overflow: hidden; }
+.descriptionCard::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 3px; background: linear-gradient(180deg, #3b82f6, #8b5cf6); border-radius: 3px; }
+.descriptionCard p { color: rgba(255,255,255,0.75); font-size: 1.05rem; line-height: 1.85; margin-bottom: 20px; }
+.descriptionCard p:last-child { margin-bottom: 0; }
+.descriptionCard strong { color: #93c5fd; font-weight: 600; }
+@media (max-width: 900px) { .grid { grid-template-columns: 1fr; gap: 40px; } .statsGrid { grid-template-columns: 1fr 1fr; max-width: 500px; margin: 0 auto; } }
+@media (max-width: 480px) { .about { padding: 60px 0; } .descriptionCard { padding: 28px; } }

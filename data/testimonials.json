@@ -1,0 +1,26 @@
+[
+  {
+    "id": "1",
+    "name": "Rohan Mehta",
+    "text": "Shree Infotech is my go-to place for all computer needs. They fixed my laptop quickly and at a very reasonable price. Excellent service!",
+    "image": "https://bytebiz.fra1.cdn.digitaloceanspaces.com/byte-qr/5797/mini-web/38371757312360583.jpg",
+    "rating": 5,
+    "status": "approved"
+  },
+  {
+    "id": "2",
+    "name": "Kavita Shah",
+    "text": "Professional, reliable, and knowledgeable! Shree Infotech helped us set up our office network smoothly. Highly recommended for business IT solutions.",
+    "image": "https://bytebiz.fra1.cdn.digitaloceanspaces.com/byte-qr/5797/mini-web/27741757312367481.jpg",
+    "rating": 5,
+    "status": "approved"
+  },
+  {
+    "id": "3",
+    "name": "Anil Patel",
+    "text": "I bought a computer from Shree Infotech, and the quality is outstanding. Their after-sales support is equally impressive. Truly trustworthy.",
+    "image": "https://bytebiz.fra1.cdn.digitaloceanspaces.com/byte-qr/5797/mini-web/28571757312375605.jpg",
+    "rating": 5,
+    "status": "approved"
+  }
+]

@@ -1,0 +1,12 @@
+.downloads { padding: 100px 0; }
+.downloadsInner { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+.grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; margin-top: 60px; }
+.card { background: rgba(255,255,255,0.04); backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,0.08); border-radius: 20px; padding: 40px 30px; text-align: center; transition: all 0.4s ease; }
+.card:hover { border-color: rgba(59,130,246,0.3); box-shadow: 0 12px 40px rgba(59,130,246,0.1); transform: translateY(-6px); }
+.iconWrap { width: 70px; height: 70px; border-radius: 16px; background: rgba(16,185,129,0.1); display: flex; align-items: center; justify-content: center; margin: 0 auto 20px; }
+.iconWrap svg { width: 32px; height: 32px; color: #34d399; }
+.cardTitle { font-size: 1.1rem; font-weight: 600; color: #f1f5f9; margin-bottom: 20px; }
+.downloadBtn { display: inline-flex; align-items: center; gap: 8px; padding: 10px 28px; background: linear-gradient(135deg, #10b981, #06b6d4); color: white; border: none; border-radius: 10px; font-weight: 600; font-size: 0.9rem; cursor: pointer; transition: all 0.3s ease; }
+.downloadBtn:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(16,185,129,0.3); }
+@media (max-width: 900px) { .grid { grid-template-columns: 1fr; max-width: 400px; margin: 60px auto 0; } }
+@media (max-width: 480px) { .downloads { padding: 60px 0; } }

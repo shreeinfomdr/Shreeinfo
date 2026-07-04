@@ -1,0 +1,13 @@
+.services { padding: 100px 0; }
+.servicesInner { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+.grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; margin-top: 60px; }
+.card { background: rgba(255,255,255,0.04); backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,0.08); border-radius: 20px; padding: 40px 30px; text-align: center; transition: all 0.4s ease; }
+.card:hover { border-color: rgba(59,130,246,0.3); box-shadow: 0 12px 40px rgba(59,130,246,0.1); transform: translateY(-6px); }
+.iconWrap { width: 80px; height: 80px; border-radius: 20px; background: rgba(59,130,246,0.1); display: flex; align-items: center; justify-content: center; margin: 0 auto 24px; }
+.iconWrap svg { width: 36px; height: 36px; color: #60a5fa; }
+.cardTitle { font-size: 1.25rem; font-weight: 700; color: #f1f5f9; margin-bottom: 12px; }
+.cardDesc { color: rgba(255,255,255,0.55); font-size: 0.95rem; line-height: 1.7; margin-bottom: 20px; }
+.learnMore { display: inline-flex; align-items: center; gap: 6px; font-weight: 600; font-size: 0.9rem; background: linear-gradient(135deg, #3b82f6, #8b5cf6); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; transition: gap 0.3s ease; text-decoration: none; cursor: pointer; border: none; }
+.learnMore:hover { gap: 12px; }
+@media (max-width: 900px) { .grid { grid-template-columns: 1fr; max-width: 500px; margin: 60px auto 0; } }
+@media (max-width: 480px) { .services { padding: 60px 0; } .card { padding: 32px 24px; } }
