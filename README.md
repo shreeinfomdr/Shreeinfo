@@ -47,10 +47,17 @@ This project is fully ready to be deployed on [Vercel](https://vercel.com).
 ### ⚠️ Important Note About Vercel & Testimonials:
 Vercel uses a "serverless" architecture, which means it **cannot write files permanently** to its own filesystem (like `data/testimonials.json`). 
 
-Right now, the testimonial submission works perfectly on your local computer. However, once hosted on Vercel, new testimonials submitted by clients will disappear after a few hours because Vercel resets its filesystem.
+**Good News: I have fully integrated a Free Vercel Database (Redis) for you!** 
+To ensure your testimonials are saved permanently when hosted on Vercel, just follow these quick steps to enable the free database:
 
-**To fix this for Vercel production:**
-You will need to connect a database (like Vercel KV, Supabase, or MongoDB) to store the testimonials permanently. The current API route (`src/app/api/testimonials/route.ts`) will need to be updated to write to the database instead of the local `.json` file.
+1. Log in to Vercel and click your `Shreeinfo` project.
+2. Go to the **Storage** tab at the top.
+3. Click **Connect Database** or **Create Database** and select **Upstash Redis** (or Vercel KV).
+4. Click through the default options to create it (the free tier is automatically selected).
+5. Vercel will automatically add the required environment variables (like `KV_REST_API_URL`) to your project.
+6. Re-deploy your project (Go to Deployments -> Redeploy).
+
+The website will automatically detect the database and start saving all client testimonials permanently!
 
 ## ✨ Features
 - **Next.js 15 App Router** for lightning-fast performance.
