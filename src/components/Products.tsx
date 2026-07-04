@@ -14,11 +14,6 @@ const products = [
     description: 'Custom-built desktop computers tailored to your specific needs and budget.',
   },
   {
-    name: 'Gaming PC',
-    image: '/images/product-gaming.jpg',
-    description: 'Ultimate gaming rigs with top-tier specs, RGB lighting, and maximum performance.',
-  },
-  {
     name: 'Refurbished & Used Laptops',
     image: 'https://images.unsplash.com/photo-1588872657578-7efd1f1555ed?auto=format&fit=crop&w=800&q=80',
     description: 'High-quality refurbished and second-hand laptops and computers at unbeatable prices.',
