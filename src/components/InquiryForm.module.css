@@ -1,14 +1,14 @@
 .inquiry { padding: 100px 0; }
 .inquiryInner { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
-.formCard { background: rgba(255,255,255,0.04); backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,0.08); border-radius: 24px; padding: 48px; max-width: 700px; margin: 60px auto 0; }
+.formCard { background: var(--bg-card); backdrop-filter: blur(12px); border: 1px solid var(--border-color); border-radius: 24px; padding: 48px; max-width: 700px; margin: 60px auto 0; }
 .formRow { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
 .inputGroup { position: relative; margin-bottom: 24px; }
-.inputGroup input, .inputGroup textarea { width: 100%; padding: 18px 16px 8px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; color: white; font-size: 1rem; outline: none; transition: all 0.3s ease; font-family: inherit; }
+.inputGroup input, .inputGroup textarea { width: 100%; padding: 18px 16px 8px; background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 12px; color: var(--text-primary); font-size: 1rem; outline: none; transition: all 0.3s ease; font-family: inherit; }
 .inputGroup input:focus, .inputGroup textarea:focus { border-color: #3b82f6; box-shadow: 0 0 0 3px rgba(59,130,246,0.1); }
-.inputGroup label { position: absolute; left: 16px; top: 14px; color: rgba(255,255,255,0.4); font-size: 0.95rem; transition: all 0.3s ease; pointer-events: none; }
+.inputGroup label { position: absolute; left: 16px; top: 14px; color: var(--text-muted); font-size: 0.95rem; transition: all 0.3s ease; pointer-events: none; }
 .inputGroup input:focus ~ label, .inputGroup input:not(:placeholder-shown) ~ label, .inputGroup textarea:focus ~ label, .inputGroup textarea:not(:placeholder-shown) ~ label { transform: translateY(-12px); font-size: 0.75rem; color: #3b82f6; }
 .inputGroup textarea { min-height: 120px; resize: vertical; }
 .submitBtn { width: 100%; padding: 16px; background: linear-gradient(135deg, #3b82f6, #8b5cf6); color: white; border: none; border-radius: 12px; font-weight: 700; font-size: 1.1rem; cursor: pointer; transition: all 0.3s ease; margin-top: 8px; }
 .submitBtn:hover { filter: brightness(1.1); transform: translateY(-2px); box-shadow: 0 12px 35px rgba(59,130,246,0.3); }
-.privacy { font-size: 0.85rem; color: rgba(255,255,255,0.35); text-align: center; margin-top: 20px; line-height: 1.5; }
+.privacy { font-size: 0.85rem; color: var(--text-muted); text-align: center; margin-top: 20px; line-height: 1.5; }
 @media (max-width: 600px) { .formRow { grid-template-columns: 1fr; } .formCard { padding: 28px; margin-top: 40px; } .inquiry { padding: 60px 0; } }
