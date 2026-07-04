@@ -93,15 +93,36 @@ export default function About() {
             {stats.map((stat, i) => {
               const isLastOdd = i === stats.length - 1 && stats.length % 2 !== 0;
               const dynamicTarget = stat.label === 'Website Visits' ? visits : stat.target;
+              const CardContent = (
+                <>
+                  <div className={styles.statIcon}>{stat.icon}</div>
+                  <CountUp target={dynamicTarget} suffix={stat.suffix} />
+                  <div className={styles.statLabel}>{stat.label}</div>
+                </>
+              );
+
+              if (stat.label === 'Google Reviews') {
+                return (
+                  <a 
+                    href="https://search.google.com/local/writereview?placeid=ChIJiUKAZBXVUDkRyiU5ZMduLh4"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={styles.statCard} 
+                    key={i}
+                    style={{ textDecoration: 'none', color: 'inherit', display: 'block', ...(isLastOdd ? { gridColumn: '1 / -1', maxWidth: '320px', margin: '0 auto', width: '100%' } : {}) }}
+                  >
+                    {CardContent}
+                  </a>
+                );
+              }
+
               return (
                 <div 
                   className={styles.statCard} 
                   key={i}
                   style={isLastOdd ? { gridColumn: '1 / -1', maxWidth: '320px', margin: '0 auto', width: '100%' } : {}}
                 >
-                  <div className={styles.statIcon}>{stat.icon}</div>
-                  <CountUp target={dynamicTarget} suffix={stat.suffix} />
-                  <div className={styles.statLabel}>{stat.label}</div>
+                  {CardContent}
                 </div>
               );
             })}
