@@ -38,13 +38,29 @@ const defaultContent = {
   workingHoursEvening: '4:00 PM - 9:00 PM'
 };
 
+import fs from 'fs';
+import path from 'path';
+
+export const dynamic = 'force-dynamic';
+
 export default async function Home() {
   let content = defaultContent;
   try {
-    const data = await kv.get<any>('site_content');
+    const useKV = !!process.env.KV_REST_API_URL;
+    let data: any = null;
+    
+    if (useKV) {
+      data = await kv.get<any>('site_content');
+    } else {
+      const localDataPath = path.join(process.cwd(), 'data', 'content.json');
+      if (fs.existsSync(localDataPath)) {
+        data = JSON.parse(fs.readFileSync(localDataPath, 'utf8'));
+      }
+    }
+    
     if (data) content = { ...defaultContent, ...data };
   } catch (e) {
-    // ignore
+    console.error('Error fetching content for homepage:', e);
   }
 
   return (
