@@ -50,11 +50,6 @@ export default function Products({ content }: { content?: any }) {
                 <p className={styles.cardDesc}>{product.description}</p>
               </div>
               <div className={styles.cardActions}>
-                {product.isRefurbished ? (
-                  <a href="/refurbished" className="btn btn-primary" style={{ width: '100%' }}>
-                    View Available Laptops
-                  </a>
-                ) : (
                   <>
                     <button className={styles.btnInquiry} onClick={scrollToInquiry}>
                       Inquiry
@@ -68,7 +63,6 @@ export default function Products({ content }: { content?: any }) {
                       💬 WhatsApp
                     </a>
                   </>
-                )}
               </div>
             </div>
           ))}
