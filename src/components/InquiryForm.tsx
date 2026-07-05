@@ -2,7 +2,7 @@
 import { useState } from 'react';
 import styles from './InquiryForm.module.css';
 
-export default function InquiryForm() {
+export default function InquiryForm({ content }: { content?: any }) {
   const [form, setForm] = useState({ name: '', phone: '', email: '', subject: '', message: '' });
 
   const [status, setStatus] = useState<'' | 'loading' | 'success' | 'error'>('');
@@ -43,8 +43,8 @@ export default function InquiryForm() {
   return (
     <section className={styles.inquiry} id="inquiry">
       <div className={styles.inquiryInner}>
-        <h2 className="section-title">Get In Touch</h2>
-        <p className="section-subtitle">Have a question? We would love to hear from you</p>
+        <h2 className="section-title">{content?.inquiryTitle || 'Get In Touch'}</h2>
+        <p className="section-subtitle">{content?.inquirySubtitle || 'Have a question? We would love to hear from you'}</p>
         <form className={styles.formCard} onSubmit={handleSubmit}>
           <div className={styles.inputGroup}>
             <input type="text" name="name" placeholder=" " required value={form.name} onChange={handleChange} />

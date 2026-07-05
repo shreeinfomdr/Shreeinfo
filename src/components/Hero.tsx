@@ -100,7 +100,7 @@ export default function Hero({ content }: { content?: any }) {
 
       <div className={styles.content}>
         <div className={styles.contentLeft}>
-          <div className={styles.badge}>🚀 Since 2005</div>
+          <div className={styles.badge}>{content?.heroBadge || '🚀 Since 2005'}</div>
           <h1 className={styles.heading}>
             {heroTitle.split(' ').map((word: string, i: number) => 
               word.toLowerCase() === 'it' || word.toLowerCase() === 'solutions' || word.toLowerCase() === 'future' ? 
@@ -113,10 +113,10 @@ export default function Hero({ content }: { content?: any }) {
           </p>
           <div className={styles.cta}>
             <button className={styles.ctaPrimary} onClick={() => scrollTo('#inquiry')}>
-              Get in Touch →
+              {content?.heroCTA1 || 'Get in Touch →'}
             </button>
             <button className={styles.ctaSecondary} onClick={() => scrollTo('#products')}>
-              Our Products
+              {content?.heroCTA2 || 'Our Products'}
             </button>
           </div>
         </div>

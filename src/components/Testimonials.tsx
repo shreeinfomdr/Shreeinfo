@@ -10,7 +10,7 @@ interface Testimonial {
   rating: number;
 }
 
-export default function Testimonials() {
+export default function Testimonials({ content }: { content?: any }) {
   const [active, setActive] = useState(0);
   const [testimonials, setTestimonials] = useState<Testimonial[]>([]);
   const [loading, setLoading] = useState(true);
@@ -70,7 +70,7 @@ export default function Testimonials() {
   const next = () => setActive((active + 1) % testimonials.length);
 
   if (loading) {
-    return <section className={styles.testimonials} id="testimonials"><div className={styles.testimonialsInner}><h2 className="section-title">What Our Clients Say</h2><p style={{textAlign:'center', color:'rgba(255,255,255,0.5)'}}>Loading testimonials...</p></div></section>;
+    return <section className={styles.testimonials} id="testimonials"><div className={styles.testimonialsInner}><h2 className="section-title">{content?.testimonialsTitle || 'What Our Clients Say'}</h2><p style={{textAlign:'center', color:'rgba(255,255,255,0.5)'}}>Loading testimonials...</p></div></section>;
   }
 
   if (testimonials.length === 0) return null;
@@ -78,7 +78,7 @@ export default function Testimonials() {
   return (
     <section className={styles.testimonials} id="testimonials">
       <div className={styles.testimonialsInner}>
-        <h2 className="section-title">What Our Clients Say</h2>
+        <h2 className="section-title">{content?.testimonialsTitle || 'What Our Clients Say'}</h2>
         <p className="section-subtitle">Trusted by businesses and individuals across Gujarat</p>
 
         <div className={styles.carouselWrap}>

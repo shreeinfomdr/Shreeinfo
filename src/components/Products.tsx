@@ -2,24 +2,6 @@
 
 import styles from './Products.module.css';
 
-const products = [
-  {
-    name: 'Laptop',
-    image: '/images/product-laptop.jpg',
-    description: 'High-performance laptops for work, gaming, and everyday use. All major brands available.',
-  },
-  {
-    name: 'Desktop',
-    image: '/images/product-desktop.jpg',
-    description: 'Custom-built desktop computers tailored to your specific needs and budget.',
-  },
-  {
-    name: 'Refurbished & Used Laptops',
-    image: 'https://images.unsplash.com/photo-1588872657578-7efd1f1555ed?auto=format&fit=crop&w=800&q=80',
-    description: 'High-quality refurbished and second-hand laptops and computers at unbeatable prices.',
-  },
-];
-
 export default function Products({ content }: { content?: any }) {
   const scrollToInquiry = () => {
     const el = document.querySelector('#inquiry');
@@ -28,6 +10,28 @@ export default function Products({ content }: { content?: any }) {
 
   const productsTitle = content?.productsTitle || 'Our Products';
   const productsSubtitle = content?.productsSubtitle || 'Premium technology solutions for every need';
+  const phone = content?.phoneNumber || '+919879713381';
+
+  const products = [
+    {
+      name: content?.product1Name || 'Laptop',
+      image: '/images/product-laptop.jpg',
+      description: content?.product1Desc || 'High-performance laptops for work, gaming, and everyday use. All major brands available.',
+      isRefurbished: false,
+    },
+    {
+      name: content?.product2Name || 'Desktop',
+      image: '/images/product-desktop.jpg',
+      description: content?.product2Desc || 'Custom-built desktop computers tailored to your specific needs and budget.',
+      isRefurbished: false,
+    },
+    {
+      name: content?.product3Name || 'Refurbished & Used Laptops',
+      image: 'https://images.unsplash.com/photo-1588872657578-7efd1f1555ed?auto=format&fit=crop&w=800&q=80',
+      description: content?.product3Desc || 'High-quality refurbished and second-hand laptops and computers at unbeatable prices.',
+      isRefurbished: true,
+    },
+  ];
 
   return (
     <section className={styles.products} id="products">
@@ -46,7 +50,7 @@ export default function Products({ content }: { content?: any }) {
                 <p className={styles.cardDesc}>{product.description}</p>
               </div>
               <div className={styles.cardActions}>
-                {product.name === 'Refurbished & Used Laptops' ? (
+                {product.isRefurbished ? (
                   <a href="/refurbished" className="btn btn-primary" style={{ width: '100%' }}>
                     View Available Laptops
                   </a>
@@ -56,7 +60,7 @@ export default function Products({ content }: { content?: any }) {
                       Inquiry
                     </button>
                     <a
-                      href={`https://wa.me/+919879713381?text=${encodeURIComponent(`Hi! I am interested in ${product.name}. Kindly connect.`)}`}
+                      href={`https://wa.me/${phone.replace(/[^0-9]/g, '')}?text=${encodeURIComponent(`Hi! I am interested in ${product.name}. Kindly connect.`)}`}
                       target="_blank"
                       rel="noopener noreferrer"
                       className={styles.btnWhatsapp}

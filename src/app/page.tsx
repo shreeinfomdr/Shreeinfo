@@ -57,12 +57,12 @@ export default async function Home() {
         <Videos content={content} />
         <Certificates content={content} />
         <Brands content={content} />
-        <InquiryForm />
-        <Testimonials />
-        <SocialLinks />
+        <InquiryForm content={content} />
+        <Testimonials content={content} />
+        <SocialLinks content={content} />
       </main>
       <Footer content={content} />
-      <FloatingContact />
+      <FloatingContact content={content} />
     </>
   );
 }
