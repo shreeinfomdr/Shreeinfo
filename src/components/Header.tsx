@@ -6,13 +6,13 @@ import Image from 'next/image';
 import styles from './Header.module.css';
 
 const navItems = [
-  { label: 'Home', href: '#home' },
-  { label: 'About', href: '#about' },
-  { label: 'Products', href: '#products' },
-  { label: 'Services', href: '#services' },
-  { label: 'Videos', href: '#videos' },
-  { label: 'Inquiry', href: '#inquiry' },
-  { label: 'Contact', href: '#contact' },
+  { label: 'Home', href: '/#home' },
+  { label: 'About', href: '/#about' },
+  { label: 'Products', href: '/#products' },
+  { label: 'Store', href: '/store' },
+  { label: 'Services', href: '/#services' },
+  { label: 'Videos', href: '/#videos' },
+  { label: 'Inquiry', href: '/#inquiry' },
 ];
 
 export default function Header({ content }: { content?: any }) {
@@ -36,10 +36,15 @@ export default function Header({ content }: { content?: any }) {
   }, [mobileOpen]);
 
   const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
-    e.preventDefault();
-    setMobileOpen(false);
-    const el = document.querySelector(href);
-    if (el) el.scrollIntoView({ behavior: 'smooth' });
+    if (href.startsWith('/#') && window.location.pathname === '/') {
+      e.preventDefault();
+      setMobileOpen(false);
+      const targetId = href.replace('/', '');
+      const el = document.querySelector(targetId);
+      if (el) el.scrollIntoView({ behavior: 'smooth' });
+    } else {
+      setMobileOpen(false);
+    }
   };
 
   return (
