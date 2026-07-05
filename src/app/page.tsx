@@ -4,6 +4,7 @@ import About from '@/components/About';
 import Products from '@/components/Products';
 import Services from '@/components/Services';
 import Videos from '@/components/Videos';
+import Gallery from '@/components/Gallery';
 import Certificates from '@/components/Certificates';
 import Brands from '@/components/Brands';
 import InquiryForm from '@/components/InquiryForm';
@@ -55,6 +56,7 @@ export default async function Home() {
         <Products content={content} />
         <Services content={content} />
         <Videos content={content} />
+        <Gallery content={content} />
         <Certificates content={content} />
         <Brands content={content} />
         <InquiryForm content={content} />

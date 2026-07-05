@@ -18,6 +18,7 @@ export default function AdminLayout({
           <Link href="/admin" className={styles.navLink}>Dashboard</Link>
           <Link href="/admin/products" className={styles.navLink}>Refurbished Laptops</Link>
           <Link href="/admin/videos" className={styles.navLink}>Videos</Link>
+          <Link href="/admin/gallery" className={styles.navLink}>Gallery</Link>
           <Link href="/admin/content" className={styles.navLink}>Site Content</Link>
           <Link href="/" className={styles.navLink} target="_blank">View Live Site ↗</Link>
         </nav>
