@@ -21,7 +21,8 @@ export default function RefurbishedStore() {
         const res = await fetch('/api/admin/products');
         const data = await res.json();
         if (Array.isArray(data)) {
-          setProducts(data);
+          // Filter to only show refurbished laptops
+          setProducts(data.filter((p: any) => (p.category || 'Refurbished Laptops') === 'Refurbished Laptops'));
         }
       } catch (err) {
         console.error('Failed to fetch refurbished products');

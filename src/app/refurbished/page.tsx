@@ -1,5 +1,15 @@
-import { redirect } from 'next/navigation';
+import Header from '@/components/Header';
+import Footer from '@/components/Footer';
+import RefurbishedStore from '@/components/RefurbishedStore';
 
 export default function RefurbishedPage() {
-  redirect('/store?category=Refurbished%20Laptops');
+  return (
+    <main>
+      <Header />
+      <div style={{ paddingTop: '80px' }}>
+        <RefurbishedStore />
+      </div>
+      <Footer />
+    </main>
+  );
 }
