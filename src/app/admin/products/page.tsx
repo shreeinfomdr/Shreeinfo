@@ -2,18 +2,6 @@
 
 import { useState, useEffect } from 'react';
 
-const CATEGORIES = [
-  'Refurbished Laptops',
-  'New Laptops',
-  'Desktop Computers',
-  'Monitors',
-  'Accessories',
-  'Parts & Components',
-  'Printers',
-  'CCTV & Security',
-  'Others'
-];
-
 interface Product {
   id: string;
   title: string;
@@ -25,20 +13,38 @@ interface Product {
 
 export default function AdminProducts() {
   const [products, setProducts] = useState<Product[]>([]);
+  const [categories, setCategories] = useState<string[]>([]);
   const [loading, setLoading] = useState(true);
   const [filterCategory, setFilterCategory] = useState<string>('All');
   
-  // Form state
+  // Product Form state
   const [isAdding, setIsAdding] = useState(false);
   const [title, setTitle] = useState('');
   const [imageFile, setImageFile] = useState<File | null>(null);
   const [specs, setSpecs] = useState('');
-  const [category, setCategory] = useState(CATEGORIES[0]);
+  const [category, setCategory] = useState('');
   const [uploading, setUploading] = useState(false);
 
+  // Category Manager state
+  const [isManagingCategories, setIsManagingCategories] = useState(false);
+  const [newCategoryName, setNewCategoryName] = useState('');
+
   useEffect(() => {
-    fetchProducts();
+    Promise.all([fetchProducts(), fetchCategories()]).finally(() => setLoading(false));
   }, []);
+
+  const fetchCategories = async () => {
+    try {
+      const res = await fetch('/api/admin/categories');
+      const data = await res.json();
+      if (Array.isArray(data)) {
+        setCategories(data);
+        if (data.length > 0) setCategory(data[0]);
+      }
+    } catch (err) {
+      console.error('Failed to fetch categories');
+    }
+  };
 
   const fetchProducts = async () => {
     try {
@@ -49,14 +55,46 @@ export default function AdminProducts() {
       }
     } catch (err) {
       console.error('Failed to fetch products');
-    } finally {
-      setLoading(false);
     }
   };
 
-  const handleAdd = async (e: React.FormEvent) => {
+  const handleAddCategory = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!newCategoryName.trim()) return;
+    
+    try {
+      const res = await fetch('/api/admin/categories', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ category: newCategoryName.trim() })
+      });
+      const data = await res.json();
+      if (data.success) {
+        setCategories(data.categories);
+        setNewCategoryName('');
+      }
+    } catch (err) {
+      alert('Error adding category');
+    }
+  };
+
+  const handleDeleteCategory = async (catToDelete: string) => {
+    if (!confirm(`Are you sure you want to delete the category "${catToDelete}"? Existing products in this category will still retain their category label.`)) return;
+    try {
+      const res = await fetch(`/api/admin/categories?category=${encodeURIComponent(catToDelete)}`, { method: 'DELETE' });
+      const data = await res.json();
+      if (data.success) {
+        setCategories(data.categories);
+      }
+    } catch (err) {
+      alert('Error deleting category');
+    }
+  };
+
+  const handleAddProduct = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!imageFile) return alert('Please select an image file first.');
+    if (!category) return alert('Please select or create a category first.');
     
     setUploading(true);
     try {
@@ -104,7 +142,7 @@ export default function AdminProducts() {
     }
   };
 
-  const handleDelete = async (id: string) => {
+  const handleDeleteProduct = async (id: string) => {
     if (!confirm('Are you sure you want to delete this product?')) return;
     try {
       const res = await fetch(`/api/admin/products?id=${id}`, { method: 'DELETE' });
@@ -120,7 +158,7 @@ export default function AdminProducts() {
     ? products 
     : products.filter(p => (p.category || 'Refurbished Laptops') === filterCategory);
 
-  if (loading) return <div>Loading products...</div>;
+  if (loading) return <div>Loading store data...</div>;
 
   return (
     <div>
@@ -128,19 +166,54 @@ export default function AdminProducts() {
         <div>
           <h1 style={{ fontSize: '1.5rem', fontWeight: 'bold' }}>Store Inventory</h1>
           <p style={{ color: '#64748b', fontSize: '0.9rem', marginTop: '4px' }}>
-            Manage all products, laptops, monitors, and accessories.
+            Manage all products and categories.
           </p>
         </div>
-        <button 
-          onClick={() => setIsAdding(!isAdding)}
-          style={{ background: '#3b82f6', color: 'white', border: 'none', padding: '10px 16px', borderRadius: '8px', cursor: 'pointer', fontWeight: '500' }}
-        >
-          {isAdding ? 'Cancel' : '+ Add New Product'}
-        </button>
+        <div style={{ display: 'flex', gap: '12px' }}>
+          <button 
+            onClick={() => { setIsManagingCategories(!isManagingCategories); setIsAdding(false); }}
+            style={{ background: isManagingCategories ? '#1e293b' : 'white', color: isManagingCategories ? 'white' : '#0f172a', border: '1px solid #cbd5e1', padding: '10px 16px', borderRadius: '8px', cursor: 'pointer', fontWeight: '500' }}
+          >
+            Manage Categories
+          </button>
+          <button 
+            onClick={() => { setIsAdding(!isAdding); setIsManagingCategories(false); }}
+            style={{ background: '#3b82f6', color: 'white', border: 'none', padding: '10px 16px', borderRadius: '8px', cursor: 'pointer', fontWeight: '500' }}
+          >
+            {isAdding ? 'Cancel' : '+ Add New Product'}
+          </button>
+        </div>
       </div>
 
+      {isManagingCategories && (
+        <div style={{ background: 'white', padding: '24px', borderRadius: '12px', border: '1px solid #e2e8f0', marginBottom: '32px' }}>
+          <h3 style={{ marginBottom: '16px' }}>Manage Categories</h3>
+          <form onSubmit={handleAddCategory} style={{ display: 'flex', gap: '12px', marginBottom: '24px' }}>
+            <input 
+              required 
+              value={newCategoryName} 
+              onChange={e => setNewCategoryName(e.target.value)} 
+              placeholder="New Category Name (e.g. Graphic Cards)" 
+              style={{ flex: 1, padding: '10px', borderRadius: '6px', border: '1px solid #cbd5e1' }} 
+            />
+            <button type="submit" style={{ background: '#10b981', color: 'white', border: 'none', padding: '10px 24px', borderRadius: '6px', cursor: 'pointer', fontWeight: '500' }}>
+              Add Category
+            </button>
+          </form>
+          
+          <div style={{ display: 'flex', flexWrap: 'wrap', gap: '10px' }}>
+            {categories.map(cat => (
+              <div key={cat} style={{ display: 'flex', alignItems: 'center', gap: '8px', background: '#f1f5f9', padding: '8px 12px', borderRadius: '20px', fontSize: '0.9rem' }}>
+                <span style={{ fontWeight: 500 }}>{cat}</span>
+                <button onClick={() => handleDeleteCategory(cat)} style={{ background: 'none', border: 'none', color: '#ef4444', cursor: 'pointer', padding: '2px' }} title="Delete Category">✕</button>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+
       {isAdding && (
-        <form onSubmit={handleAdd} style={{ background: 'white', padding: '24px', borderRadius: '12px', border: '1px solid #e2e8f0', marginBottom: '32px', display: 'flex', flexDirection: 'column', gap: '16px' }}>
+        <form onSubmit={handleAddProduct} style={{ background: 'white', padding: '24px', borderRadius: '12px', border: '1px solid #e2e8f0', marginBottom: '32px', display: 'flex', flexDirection: 'column', gap: '16px' }}>
           <h3>Add New Product</h3>
           
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px' }}>
@@ -151,8 +224,9 @@ export default function AdminProducts() {
 
             <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
               <label style={{ fontSize: '0.9rem', fontWeight: 600 }}>Category</label>
-              <select value={category} onChange={e => setCategory(e.target.value)} style={{ padding: '10px', borderRadius: '6px', border: '1px solid #cbd5e1', background: 'white' }}>
-                {CATEGORIES.map(cat => (
+              <select required value={category} onChange={e => setCategory(e.target.value)} style={{ padding: '10px', borderRadius: '6px', border: '1px solid #cbd5e1', background: 'white' }}>
+                <option value="" disabled>Select a category</option>
+                {categories.map(cat => (
                   <option key={cat} value={cat}>{cat}</option>
                 ))}
               </select>
@@ -187,11 +261,10 @@ export default function AdminProducts() {
           onClick={() => setFilterCategory('All')}
           style={{ padding: '6px 14px', borderRadius: '20px', border: '1px solid #cbd5e1', background: filterCategory === 'All' ? '#1e293b' : 'white', color: filterCategory === 'All' ? 'white' : '#334155', cursor: 'pointer', whiteSpace: 'nowrap' }}
         >
-          All Categories
+          All Categories ({products.length})
         </button>
-        {CATEGORIES.map(cat => {
+        {categories.map(cat => {
           const count = products.filter(p => (p.category || 'Refurbished Laptops') === cat).length;
-          if (count === 0 && cat !== 'Refurbished Laptops') return null; // hide empty categories to keep UI clean
           
           return (
             <button 
@@ -236,7 +309,7 @@ export default function AdminProducts() {
                   Mark as {product.status === 'available' ? 'Sold' : 'Available'}
                 </button>
                 <button 
-                  onClick={() => handleDelete(product.id)}
+                  onClick={() => handleDeleteProduct(product.id)}
                   style={{ padding: '8px 12px', borderRadius: '6px', border: '1px solid #ef4444', background: '#fee2e2', color: '#ef4444', cursor: 'pointer' }}
                   title="Delete"
                 >
