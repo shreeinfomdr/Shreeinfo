@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server';
 import { kv } from '@vercel/kv';
+import { del } from '@vercel/blob';
 import fs from 'fs';
 import path from 'path';
 
@@ -110,16 +111,32 @@ export async function DELETE(req: Request) {
     }
 
     let products: any[] = [];
+    let imageToDelete: string | undefined;
+
     if (useKV) {
       products = (await kv.get<any[]>('refurbished_products')) || [];
+      const productToDelete = products.find((p: any) => p.id === id);
+      if (productToDelete) imageToDelete = productToDelete.image;
+      
       products = products.filter((p: any) => p.id !== id);
       await kv.set('refurbished_products', products);
     } else {
       if (fs.existsSync(localDataPath)) {
         products = JSON.parse(fs.readFileSync(localDataPath, 'utf8'));
       }
+      const productToDelete = products.find((p: any) => p.id === id);
+      if (productToDelete) imageToDelete = productToDelete.image;
+      
       products = products.filter((p: any) => p.id !== id);
       fs.writeFileSync(localDataPath, JSON.stringify(products, null, 2));
+    }
+
+    if (imageToDelete && imageToDelete.includes('public.blob.vercel-storage.com')) {
+      try {
+        await del(imageToDelete);
+      } catch (err) {
+        console.error('Failed to delete image from blob:', err);
+      }
     }
 
     return NextResponse.json({ success: true });
