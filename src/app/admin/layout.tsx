@@ -16,7 +16,7 @@ export default function AdminLayout({
         </div>
         <nav className={styles.nav}>
           <Link href="/admin" className={styles.navLink}>Dashboard</Link>
-          <Link href="/admin/products" className={styles.navLink}>Refurbished Laptops</Link>
+          <Link href="/admin/products" className={styles.navLink}>Store Inventory</Link>
           <Link href="/admin/videos" className={styles.navLink}>Videos</Link>
           <Link href="/admin/gallery" className={styles.navLink}>Gallery</Link>
           <Link href="/admin/content" className={styles.navLink}>Site Content</Link>

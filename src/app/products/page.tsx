@@ -1,57 +1,169 @@
 'use client';
+
+import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 
-const allProducts = [
-  { title: "Laptop", img: "https://images.unsplash.com/photo-1496181133206-80ce9b88a853?auto=format&fit=crop&w=800&q=80", brands: "HP, Dell, Lenovo, ASUS, Acer, Apple" },
-  { title: "Desktop", img: "https://images.unsplash.com/photo-1593640408182-31c70c8268f5?auto=format&fit=crop&w=800&q=80", brands: "HP, Dell, Lenovo, ASUS, Custom Builds" },
-  { title: "Gaming Pc", img: "https://images.unsplash.com/photo-1587202372775-e229f172b9d7?auto=format&fit=crop&w=800&q=80", brands: "ASUS ROG, MSI, Gigabyte, Corsair" },
-  { title: "Printer", img: "https://images.unsplash.com/photo-1612815154858-60aa4c59eaa6?auto=format&fit=crop&w=800&q=80", brands: "HP, Canon, Epson, Brother" },
-  { title: "Cctv & security surveillance", img: "https://bytebiz.fra1.cdn.digitaloceanspaces.com/byte-qr/5797/mini-web/70201757307743990.jpg", brands: "CP Plus, Hikvision, Dahua, Godrej" },
-  { title: "Laptop & Computer accessories", img: "https://bytebiz.fra1.cdn.digitaloceanspaces.com/byte-qr/5797/mini-web/77221757307809866.png", brands: "Logitech, Dell, HP, Zebronics, Portronics" },
-  { title: "Laptop battery", img: "https://bytebiz.fra1.cdn.digitaloceanspaces.com/byte-qr/5797/mini-web/68171757311828466.jpg", brands: "HP, Dell, Lenovo, Acer, ASUS (OEM & Compatible)" },
-  { title: "Laptop Charger", img: "https://images.unsplash.com/photo-1583863788434-e58a36330cf0?auto=format&fit=crop&w=800&q=80", brands: "Original & Compatible Adapters for All Brands" },
-  { title: "Screen", img: "https://images.unsplash.com/photo-1517430816045-df4b7de11d1d?auto=format&fit=crop&w=800&q=80", brands: "LG, Samsung, Dell, Acer, AOC, BenQ" },
-  { title: "Laptop Hinges", img: "https://bytebiz.fra1.cdn.digitaloceanspaces.com/byte-qr/5797/mini-web/26231757311947799.jpeg", brands: "OEM Replacements for HP, Dell, Lenovo, ASUS" },
-  { title: "Speakar", img: "https://images.unsplash.com/photo-1545454675-3531b543be5d?auto=format&fit=crop&w=800&q=80", brands: "JBL, Sony, Zebronics, F&D, Boat" },
-  { title: "Keyboard", img: "https://images.unsplash.com/photo-1595225476474-87563907a212?auto=format&fit=crop&w=800&q=80", brands: "Logitech, TVS, Dell, HP, Redragon" },
-  { title: "Refurbished Laptops", img: "https://images.unsplash.com/photo-1588872657578-7efd1f1555ed?auto=format&fit=crop&w=800&q=80", brands: "Dell, HP, Lenovo (High Quality Refurbished)" },
-  { title: "Old Laptops & Computers", img: "https://images.unsplash.com/photo-1541807084-5c52b6b3adef?auto=format&fit=crop&w=800&q=80", brands: "Affordable Second-Hand Systems" }
+interface Product {
+  id: string;
+  title: string;
+  image: string;
+  specs: string;
+  status: 'available' | 'sold';
+  category?: string;
+}
+
+const CATEGORIES = [
+  'All',
+  'Refurbished Laptops',
+  'New Laptops',
+  'Desktop Computers',
+  'Monitors',
+  'Accessories',
+  'Parts & Components',
+  'Printers',
+  'CCTV & Security',
+  'Others'
 ];
 
 export default function ProductsPage() {
+  const [products, setProducts] = useState<Product[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [activeCategory, setActiveCategory] = useState('All');
+
+  useEffect(() => {
+    const fetchProducts = async () => {
+      try {
+        const res = await fetch('/api/admin/products');
+        const data = await res.json();
+        if (Array.isArray(data)) {
+          setProducts(data);
+        }
+      } catch (err) {
+        console.error('Failed to fetch products');
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchProducts();
+  }, []);
+
+  const filteredProducts = activeCategory === 'All' 
+    ? products 
+    : products.filter(p => (p.category || 'Refurbished Laptops') === activeCategory);
+
   return (
     <main style={{ minHeight: '100vh', padding: '120px 24px 60px', backgroundColor: 'var(--bg-primary)' }}>
       <div className="container" style={{ maxWidth: '1200px', margin: '0 auto' }}>
-        <div style={{ display: 'flex', alignItems: 'center', marginBottom: '40px' }}>
-          <Link href="/#products" style={{ display: 'flex', alignItems: 'center', gap: '8px', color: 'var(--text-secondary)', textDecoration: 'none', fontWeight: 600 }}>
+        <div style={{ display: 'flex', alignItems: 'center', marginBottom: '30px' }}>
+          <Link href="/#products" style={{ display: 'flex', alignItems: 'center', gap: '8px', color: 'var(--text-secondary)', textDecoration: 'none', fontWeight: 600, transition: 'color 0.2s' }}>
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
-            Back
+            Back to Home
           </Link>
-          <h1 className="section-title" style={{ margin: '0 auto', paddingRight: '60px' }}>All Products</h1>
+          <h1 className="section-title" style={{ margin: '0 auto', paddingRight: '120px' }}>Our Store</h1>
         </div>
+        
+        <p className="section-subtitle" style={{ marginBottom: '40px' }}>
+          Browse our complete inventory of new and refurbished technology products.
+        </p>
 
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', gap: '30px' }}>
-          {allProducts.map((p, i) => (
-            <div key={i} className="glass-card" style={{ padding: '20px', display: 'flex', flexDirection: 'column', height: '100%' }}>
-              <div style={{ position: 'relative', width: '100%', height: '200px', marginBottom: '16px', borderRadius: '12px', overflow: 'hidden' }}>
-                <Image src={p.img} alt={p.title} fill style={{ objectFit: 'cover' }} unoptimized />
-              </div>
-              <h3 style={{ fontSize: '1.2rem', marginBottom: '12px', textAlign: 'center', color: '#f1f5f9' }}>{p.title}</h3>
-              <div style={{ display: 'flex', flexWrap: 'wrap', gap: '6px', justifyContent: 'center', marginBottom: '20px', flex: 1, alignContent: 'flex-start' }}>
-                {p.brands.split(', ').map((brand, idx) => (
-                  <span key={idx} style={{ padding: '4px 12px', background: 'linear-gradient(135deg, rgba(59,130,246,0.15), rgba(139,92,246,0.15))', color: '#93c5fd', border: '1px solid rgba(59,130,246,0.3)', borderRadius: '20px', fontSize: '0.75rem', fontWeight: 700, letterSpacing: '0.5px', textTransform: 'uppercase' }}>
-                    {brand}
-                  </span>
-                ))}
-              </div>
-              <div style={{ display: 'flex', gap: '12px', justifyContent: 'center' }}>
-                <Link href="/#inquiry" className="btn btn-outline" style={{ flex: 1, padding: '10px 0' }}>Inquiry</Link>
-                <a href={`https://wa.me/+919879713381?text=Hi! I am interested in ${p.title}. Kindly connect.`} target="_blank" rel="noopener noreferrer" className="btn btn-whatsapp" style={{ flex: 1, padding: '10px 0' }}>WhatsApp</a>
-              </div>
+        {loading ? (
+          <div style={{ textAlign: 'center', padding: '60px 0', color: 'var(--text-secondary)' }}>
+            Loading inventory...
+          </div>
+        ) : (
+          <>
+            {/* Category Tabs */}
+            <div style={{ display: 'flex', gap: '12px', overflowX: 'auto', paddingBottom: '20px', marginBottom: '30px', WebkitOverflowScrolling: 'touch', scrollbarWidth: 'none' }}>
+              {CATEGORIES.map(cat => {
+                const count = cat === 'All' 
+                  ? products.length 
+                  : products.filter(p => (p.category || 'Refurbished Laptops') === cat).length;
+                  
+                if (count === 0) return null; // Hide empty categories
+
+                return (
+                  <button
+                    key={cat}
+                    onClick={() => setActiveCategory(cat)}
+                    style={{
+                      padding: '10px 24px',
+                      borderRadius: '30px',
+                      border: `1px solid ${activeCategory === cat ? 'var(--accent-blue)' : 'var(--border-color)'}`,
+                      background: activeCategory === cat ? 'rgba(59,130,246,0.1)' : 'var(--bg-card)',
+                      color: activeCategory === cat ? 'var(--accent-blue)' : 'var(--text-primary)',
+                      cursor: 'pointer',
+                      fontWeight: activeCategory === cat ? 700 : 500,
+                      whiteSpace: 'nowrap',
+                      transition: 'all 0.3s ease'
+                    }}
+                  >
+                    {cat} <span style={{ opacity: 0.6, fontSize: '0.9em', marginLeft: '4px' }}>({count})</span>
+                  </button>
+                );
+              })}
             </div>
-          ))}
-        </div>
+
+            {/* Product Grid */}
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))', gap: '30px' }}>
+              {filteredProducts.map((product) => (
+                <div key={product.id} className="glass-card" style={{ padding: '20px', display: 'flex', flexDirection: 'column', height: '100%', position: 'relative' }}>
+                  
+                  {product.status === 'sold' && (
+                    <div style={{ position: 'absolute', top: 32, right: 32, background: 'rgba(239,68,68,0.9)', color: 'white', padding: '6px 16px', borderRadius: '20px', fontSize: '0.85rem', fontWeight: 700, zIndex: 10, backdropFilter: 'blur(4px)' }}>
+                      Sold Out
+                    </div>
+                  )}
+
+                  <div style={{ position: 'relative', width: '100%', height: '220px', marginBottom: '20px', borderRadius: '12px', overflow: 'hidden', background: '#f8fafc' }}>
+                    <Image 
+                      src={product.image} 
+                      alt={product.title} 
+                      fill 
+                      style={{ objectFit: 'cover', opacity: product.status === 'sold' ? 0.6 : 1, transition: 'transform 0.5s ease' }} 
+                      unoptimized 
+                    />
+                  </div>
+                  
+                  <div style={{ display: 'flex', flexDirection: 'column', flex: 1 }}>
+                    <div style={{ fontSize: '0.8rem', color: 'var(--accent-blue)', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.5px', marginBottom: '8px' }}>
+                      {product.category || 'Refurbished Laptops'}
+                    </div>
+                    
+                    <h3 style={{ fontSize: '1.25rem', marginBottom: '12px', color: '#f1f5f9', fontWeight: 600, lineHeight: 1.4 }}>
+                      {product.title}
+                    </h3>
+                    
+                    <p style={{ color: 'var(--text-secondary)', fontSize: '0.95rem', lineHeight: 1.6, whiteSpace: 'pre-wrap', marginBottom: '24px', flex: 1 }}>
+                      {product.specs}
+                    </p>
+                    
+                    <div style={{ display: 'flex', gap: '12px', marginTop: 'auto' }}>
+                      {product.status === 'available' ? (
+                        <>
+                          <Link href="/#inquiry" className="btn btn-outline" style={{ flex: 1, padding: '12px 0' }}>Inquiry</Link>
+                          <a 
+                            href={`https://wa.me/+919879713381?text=${encodeURIComponent(`Hi! I am interested in your ${product.category || 'Refurbished Laptop'} - ${product.title}. Kindly connect.`)}`} 
+                            target="_blank" 
+                            rel="noopener noreferrer" 
+                            className="btn btn-whatsapp" 
+                            style={{ flex: 1, padding: '12px 0' }}
+                          >
+                            WhatsApp
+                          </a>
+                        </>
+                      ) : (
+                        <button disabled style={{ flex: 1, padding: '12px 0', background: 'rgba(255,255,255,0.05)', color: 'rgba(255,255,255,0.4)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '8px', cursor: 'not-allowed', fontWeight: 600 }}>
+                          Currently Unavailable
+                        </button>
+                      )}
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </>
+        )}
       </div>
     </main>
   );

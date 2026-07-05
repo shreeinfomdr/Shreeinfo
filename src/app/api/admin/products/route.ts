@@ -43,7 +43,8 @@ export async function POST(req: Request) {
       title: data.title,
       image: data.image,
       specs: data.specs,
-      status: data.status || 'available', // 'available' or 'sold'
+      status: data.status || 'available',
+      category: data.category || 'Refurbished Laptops',
     };
 
     let products: any[] = [];
