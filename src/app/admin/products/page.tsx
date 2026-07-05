@@ -68,8 +68,9 @@ export default function AdminProducts() {
         setIsAdding(false);
         setTitle(''); setImageFile(null); setSpecs('');
       }
-    } catch (err) {
-      alert('Error adding product or uploading image.');
+    } catch (err: unknown) {
+      const msg = err instanceof Error ? err.message : 'Unknown error';
+      alert('Upload error: ' + msg);
     } finally {
       setUploading(false);
     }
