@@ -1,17 +1,44 @@
 'use client';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import styles from './Videos.module.css';
 
-const videos = [
-  { id: 'g5o_cyku3tw', title: 'VGA Port Replacement' },
-  { id: 'G5_kviQDzkk', title: 'Shree Infotech Intro' },
-  { id: '3fiJAVuksVU', title: 'Shree Infotech' },
-];
+interface Video {
+  id: string;
+  youtubeId: string;
+  title: string;
+  isFeatured?: boolean;
+}
 
 export default function Videos({ content }: { content?: any }) {
   const [activeVideo, setActiveVideo] = useState<string | null>(null);
+  const [videos, setVideos] = useState<Video[]>([]);
+  const [loading, setLoading] = useState(true);
+  
   const videosTitle = content?.videosTitle || 'Tech Insights & Repairs';
   const videosSubtitle = content?.videosSubtitle || 'Watch our expert technicians in action and learn more about technology.';
+
+  useEffect(() => {
+    const fetchVideos = async () => {
+      try {
+        const res = await fetch('/api/admin/videos');
+        const data = await res.json();
+        if (Array.isArray(data) && data.length > 0) {
+          // Display only featured videos, up to 3
+          const featured = data.filter((v: Video) => v.isFeatured).slice(0, 3);
+          // If no featured videos, fallback to first 3
+          setVideos(featured.length > 0 ? featured : data.slice(0, 3));
+        }
+      } catch (error) {
+        console.error('Failed to load videos:', error);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchVideos();
+  }, []);
+
+  if (loading) return null;
+  if (videos.length === 0) return null;
 
   return (
     <section className={styles.videos} id="videos">
@@ -20,9 +47,9 @@ export default function Videos({ content }: { content?: any }) {
         <p className="section-subtitle">{videosSubtitle}</p>
         <div className={styles.grid}>
           {videos.map((video) => (
-            <div key={video.id} className={styles.card} onClick={() => setActiveVideo(video.id)}>
+            <div key={video.id} className={styles.card} onClick={() => setActiveVideo(video.youtubeId)}>
               <div className={styles.thumbnailWrap}>
-                <img src={`https://img.youtube.com/vi/${video.id}/hqdefault.jpg`} alt={video.title} loading="lazy" />
+                <img src={`https://img.youtube.com/vi/${video.youtubeId}/hqdefault.jpg`} alt={video.title} loading="lazy" />
                 <div className={styles.playBtn}>
                   <div className={styles.playIcon} />
                 </div>
